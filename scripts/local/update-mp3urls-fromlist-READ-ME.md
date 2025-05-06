@@ -18,7 +18,8 @@ This script updates MP3 file URLs in a podcast feed XML file. It was specificall
 
 1. Place the `update-mp3urls-fromlist.sh` script in your repository's `scripts/local/` directory
 2. Make the script executable:
-   ```
+
+   ```bash
    chmod +x update-mp3urls-fromlist.sh
    ```
 
@@ -32,6 +33,7 @@ cd /path/to/repository/scripts/local/
 ```
 
 The script will:
+
 1. Create a backup of your podcast feed
 2. Update the base URL and convert filenames to lowercase
 3. Create a log file with details of the changes
@@ -39,7 +41,8 @@ The script will:
 ## File Paths
 
 The script assumes the following structure:
-```
+
+```bash
 /repository-root/
   ├── public/
   │   └── podcast-feed.xml
