@@ -13,6 +13,8 @@
       } else if (location.pathname.includes('episode')) {
         await this.initPlayer()
       }
+      // Always ensure global access to player for cross-page continuity
+      window.globalEverPlayer = this.everPlayer;
     }
 
     async initPlayer(episode) {
@@ -25,6 +27,9 @@
           await this.showDetails.bind(this, element)(true);
         })
       });
+
+      // Add progress indicators
+      this.addProgressIndicators();
 
       // Показать самый свежий эпизод
       this.showDetails(this.episodeEl[0], false);
@@ -77,6 +82,35 @@
       const player = new Player(li, episode, this.everPlayer);
     }
     
+    addProgressIndicators() {
+      Array.from(this.episodeEl).forEach((element) => {
+        const li = element.parentNode.parentNode;
+        const episodeNum = li.getAttribute('data-episode-num');
+        const saved = localStorage.getItem(`episode_progress_${episodeNum}`);
+        
+        if (saved) {
+          try {
+            const progress = JSON.parse(saved);
+            // Only show indicator if saved within last 30 days
+            if (Date.now() - progress.timestamp < 30 * 24 * 60 * 60 * 1000) {
+              const indicator = document.createElement('span');
+              indicator.className = 'progress-indicator';
+              indicator.innerHTML = '●';
+              indicator.style.cssText = 'color: #007bff; font-size: 8px; margin-left: 4px; opacity: 0.7;';
+              indicator.title = `Продолжить с ${Math.floor(progress.currentTime / 60)}:${Math.floor(progress.currentTime % 60).toString().padStart(2, '0')}`;
+              
+              const episodeNum = li.querySelector('.episode-num');
+              if (episodeNum && !episodeNum.querySelector('.progress-indicator')) {
+                episodeNum.appendChild(indicator);
+              }
+            }
+          } catch (e) {
+            console.warn('Failed to parse progress:', e);
+          }
+        }
+      });
+    }
+
     constructElement(episode) {
       const fragment = document.createElement('div'),
             href = '/episodes/' + episode.episodeNum,
