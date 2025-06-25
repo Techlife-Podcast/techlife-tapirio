@@ -208,18 +208,10 @@ router.get("/voprosy", (req, res) => {
 // Handle question submissions
 router.post("/voprosy", async (req, res) => {
   try {
-    console.log('DEBUG: Received POST to /voprosy');
-    console.log('DEBUG: req.body:', req.body);
-    console.log('DEBUG: Content-Type:', req.get('Content-Type'));
-    
     const { name, email, question, category, privacy } = req.body;
-    
-    console.log('DEBUG: Extracted question:', JSON.stringify(question));
-    console.log('DEBUG: Question length:', question ? question.length : 'undefined');
     
     // Validate required fields
     if (!question || !question.trim()) {
-      console.log('DEBUG: Question validation failed');
       return res.status(400).json({ error: "Вопрос обязателен для заполнения" });
     }
     
@@ -267,6 +259,72 @@ router.post("/voprosy", async (req, res) => {
   } catch (error) {
     console.error('Error saving question:', error);
     res.status(500).json({ error: "Произошла ошибка при сохранении вопроса" });
+  }
+});
+
+// Admin page for viewing question submissions
+router.get("/adminka/voprosy", async (req, res) => {
+  try {
+    const fs = require('fs-extra');
+    const path = require('path');
+    const questionsFile = path.join(__dirname, '..', 'content', 'listener-questions.json');
+    
+    let questions = [];
+    try {
+      const data = await fs.readFile(questionsFile, 'utf8');
+      questions = JSON.parse(data);
+    } catch (err) {
+      // File doesn't exist or is empty
+      questions = [];
+    }
+    
+    // Process questions for display
+    const processedQuestions = questions.map(q => ({
+      ...q,
+      formattedDate: new Date(q.timestamp).toLocaleDateString('ru-RU', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      }),
+      formattedTime: new Date(q.timestamp).toLocaleTimeString('ru-RU', {
+        hour: '2-digit',
+        minute: '2-digit'
+      }),
+      questionPreview: q.question.length > 100 ? q.question.substring(0, 100) : q.question
+    }));
+    
+    // Sort by timestamp (newest first)
+    processedQuestions.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+    
+    // Helper function for category names
+    const getCategoryName = (category) => {
+      const categories = {
+        'technology': 'Технологии',
+        'philosophy': 'Философия', 
+        'travel': 'Путешествия',
+        'security': 'ИИ',
+        'lifestyle': 'Образ жизни',
+        'future': 'Будущее',
+        'other': 'Другое'
+      };
+      return categories[category] || 'Другое';
+    };
+    
+    res.render("voprosy-admin", {
+      questions: processedQuestions,
+      getCategoryName,
+      projectInfo,
+      path: req.path,
+      pageTitle: "Админ панель - Вопросы слушателей",
+      noIndex: true // Don't index admin pages
+    });
+    
+  } catch (error) {
+    console.error('Error loading questions:', error);
+    res.status(500).render('error', { 
+      message: 'Ошибка загрузки вопросов',
+      error: req.app.get('env') === 'development' ? error : {}
+    });
   }
 });
 
