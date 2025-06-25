@@ -1,15 +1,15 @@
 {
-  "project": {
-    "title": "Технологии и жизнь: подкаст",
-    "author": "Vasily Myazin",
-    "description": "Подкаст о современной жизни, философии, и путешествиях с технологической, космополитической, и контркультурной точек зрения.",
-    "URL": "https://www.techlifepodcast.com"
-  },
-  "appIds": {
-    "googleAnalytics": "UA-2420101-40",
-    "facebookApp": "BBCCDD"
-  },
-  "social": {
-    "telegram": "https://t.me/techlifepodcast"
-  }
+    "project": {
+        "title": "Технологии и жизнь: подкаст",
+        "author": "Vasily Myazin",
+        "description": "Подкаст о современной жизни, философии, путешествиях и искусственном интеллекте с технологической, космополитической, и контркультурной точек зрения.",
+        "URL": "https://www.techlifepodcast.com"
+    },
+    "appIds": {
+        "googleAnalytics": "UA-2420101-40",
+        "facebookApp": "BBCCDD"
+    },
+    "social": {
+        "telegram": "https://t.me/techlifepodcast"
+    }
 }
