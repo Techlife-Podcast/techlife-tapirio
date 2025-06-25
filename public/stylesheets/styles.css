@@ -52,7 +52,8 @@ p.small {
   font-size: 20px;
 }
 
-b, strong {
+b,
+strong {
   font-weight: 600;
 }
 
@@ -678,6 +679,25 @@ img.hero-image {
   background: url(/images/bg-404-concrete.jpg) no-repeat center center;
   background-size: cover;
   height: 100vh;
+}
+
+.card.border-info {
+  border-color: #41caff !important;
+}
+.card .card-header.bg-info {
+  background-color: #41caff !important;
+  border-bottom-color: #41caff !important;
+}
+.card .card-header.bg-info h5,
+.card .card-header.bg-info .card-title {
+  color: #fff !important;
+}
+.card .card-body {
+  background-color: rgba(65, 202, 255, 0.1);
+}
+.card .card-body ul li {
+  font-size: 20px;
+  color: #333;
 }
 
 /* Font sizes */
