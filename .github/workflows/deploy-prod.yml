@@ -18,7 +18,13 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd /var/www/techlifepodcast.com
+            # Reset any local changes to ensure clean deployment
+            git reset --hard HEAD
+            git clean -fd
+            # Pull latest changes
             git pull origin master
-            npm install --production
+            # Install dependencies (using modern flag)
+            npm install --omit=dev
+            # Restart application
             mkdir -p tmp
             touch tmp/restart.txt
