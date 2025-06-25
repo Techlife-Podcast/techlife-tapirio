@@ -430,7 +430,7 @@ a.d-flex {
 
 .btn-primary {
     background-color: $accent;
-    color: white;
+    color: $black;
     border-color: $accent;
 }
 
@@ -740,14 +740,12 @@ img.hero-image {
     font-size: $font-s4;
     padding: 0.75rem;
     border-radius: 3px;
-    
     &:focus {
         background-color: rgba($dark-grey, 0.9);
         border-color: $accent;
         box-shadow: 0 0 0 0.2rem rgba($accent, 0.25);
         color: #fff;
     }
-    
     &::placeholder {
         color: $mid-grey;
     }
@@ -776,7 +774,6 @@ label {
     .form-check-input {
         margin-top: 0.25rem;
     }
-    
     .form-check-label {
         font-size: $font-s4;
         color: $light-grey;
@@ -788,7 +785,6 @@ label {
 .table {
     color: #f2f2f2;
     font-size: $font-s4;
-    
     th {
         background-color: $dark-grey;
         color: #fff;
@@ -797,13 +793,11 @@ label {
         border-color: $mid-grey;
         padding: 1rem 0.75rem;
     }
-    
     td {
         border-color: rgba($mid-grey, 0.3);
         padding: 0.75rem;
         vertical-align: middle;
     }
-    
     &.table-hover tbody tr:hover {
         background-color: rgba($accent, 0.1);
     }
@@ -821,7 +815,6 @@ label {
     background-color: rgba($dark-grey, 0.8);
     border: 1px solid $mid-grey;
     border-radius: 8px;
-    
     .card-header {
         background-color: $accent;
         border-bottom: 1px solid $accent;
@@ -829,28 +822,24 @@ label {
         font-size: $font-s4;
         font-weight: 600;
         padding: 1rem;
-        
-        h5, .card-title {
+        h5,
+        .card-title {
             color: #fff;
             margin: 0;
             font-size: $font-s4;
         }
     }
-    
     .card-body {
         padding: 1.5rem;
         background-color: rgba($accent, 0.05);
-        
         ul {
             margin: 0;
             padding: 0;
             list-style: none;
-            
             li {
                 font-size: $font-s4;
                 color: $light-grey;
                 margin-bottom: 0.75rem;
-                
                 &:last-child {
                     margin-bottom: 0;
                 }
@@ -864,22 +853,18 @@ label {
     font-size: 0.85em;
     font-weight: 600;
     padding: 0.35em 0.65em;
-    
     &.badge-primary {
         background-color: $accent;
         color: #fff;
     }
-    
     &.badge-secondary {
         background-color: $mid-grey;
         color: #fff;
     }
-    
     &.badge-info {
         background-color: $accent-darker;
         color: #fff;
     }
-    
     &.badge-light {
         background-color: $light-grey;
         color: $dark-grey;
@@ -891,19 +876,16 @@ label {
     font-size: $font-s4;
     border-radius: 3px;
     border: none;
-    
     &.alert-success {
         background-color: rgba(40, 167, 69, 0.15);
         color: #c3e6cb;
         border-left: 4px solid #28a745;
     }
-    
     &.alert-danger {
         background-color: rgba(220, 53, 69, 0.15);
         color: #f5c6cb;
         border-left: 4px solid #dc3545;
     }
-    
     &.alert-info {
         background-color: rgba($accent, 0.15);
         color: lighten($accent, 20%);

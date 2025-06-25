@@ -401,7 +401,7 @@ a.d-flex:hover p {
 
 .btn-primary {
   background-color: #41caff;
-  color: white;
+  color: #111;
   border-color: #41caff;
 }
 
@@ -772,7 +772,8 @@ label {
   font-weight: 600;
   padding: 1rem;
 }
-.card .card-header h5, .card .card-header .card-title {
+.card .card-header h5,
+.card .card-header .card-title {
   color: #fff;
   margin: 0;
   font-size: 20px;
