@@ -195,18 +195,23 @@ router.get("/blog/:filename", async (req, res) => {
   });
 });
 
-// Questions submission page
-router.get("/voprosy", (req, res) => {
+// Questions submission page with alternative routes
+const questionPageHandler = (req, res) => {
   res.render("voprosy", {
     projectInfo,
     path: req.path,
     pageTitle: "Задать вопрос",
     pageDescription: "Задайте свой вопрос ведущим подкаста Технологии и жизнь",
   });
-});
+};
 
-// Handle question submissions
-router.post("/voprosy", async (req, res) => {
+router.get("/voprosy", questionPageHandler);
+router.get("/ask", questionPageHandler);
+router.get("/contact", questionPageHandler);
+router.get("/question", questionPageHandler);
+
+// Handle question submissions for all question routes
+const questionSubmissionHandler = async (req, res) => {
   try {
     const { name, email, question, category, privacy } = req.body;
     
@@ -260,7 +265,12 @@ router.post("/voprosy", async (req, res) => {
     console.error('Error saving question:', error);
     res.status(500).json({ error: "Произошла ошибка при сохранении вопроса" });
   }
-});
+};
+
+router.post("/voprosy", questionSubmissionHandler);
+router.post("/ask", questionSubmissionHandler);
+router.post("/contact", questionSubmissionHandler);
+router.post("/question", questionSubmissionHandler);
 
 // Admin page for viewing question submissions
 router.get("/adminka/voprosy", async (req, res) => {
