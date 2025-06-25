@@ -43,7 +43,8 @@ class EverPlayer {
       play: this.container.querySelector('.btn-play'),
       bar: this.container.querySelector('.progress-bard'),
       soFar: this.container.querySelector('.so-far'),
-      title: this.container.querySelector('.title')
+      title: this.container.querySelector('.title'),
+      timeDisplay: this.container.querySelector('.time-display')
     }
     
     this.player.addEventListener('canplay', () => {
@@ -195,8 +196,20 @@ class EverPlayer {
       localStorage.removeItem('current_playback_state');
     }
   }
+  formatTime(seconds) {
+    if (isNaN(seconds) || seconds < 0) return '--:--';
+    const minutes = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  }
+  
   updateBar() {
     const progress = this.player.currentTime / this.player.duration * 100;
     this.controls.soFar.style.width = progress + '%';
+    
+    // Update time display: current (total)
+    const currentTime = this.formatTime(this.player.currentTime);
+    const totalTime = this.formatTime(this.player.duration);
+    this.controls.timeDisplay.textContent = `${currentTime} (${totalTime})`;
   }
 }
