@@ -44,8 +44,14 @@ class EverPlayer {
       bar: this.container.querySelector('.progress-bard'),
       soFar: this.container.querySelector('.so-far'),
       title: this.container.querySelector('.title'),
-      timeDisplay: this.container.querySelector('.time-display')
+      timeDisplay: this.container.querySelector('.time-display'),
+      speedControl: this.container.querySelector('.speed-control')
     }
+    
+    // Initialize playback speed
+    this.playbackSpeeds = [1, 1.25, 1.5, 1.75, 2];
+    this.currentSpeedIndex = 0;
+    this.player.playbackRate = this.playbackSpeeds[this.currentSpeedIndex];
     
     this.player.addEventListener('canplay', () => {
       this.audioLoaded = true
@@ -71,6 +77,11 @@ class EverPlayer {
       if (this.audioLoaded) {
         this.player.currentTime = this.player.duration / 100 * percentagePlayed;
       }
+    })
+
+    // Speed control functionality
+    this.controls.speedControl.addEventListener('click', () => {
+      this.cyclePlaybackSpeed();
     })
   }  
   set source(s) {
@@ -203,6 +214,19 @@ class EverPlayer {
     return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   }
   
+  cyclePlaybackSpeed() {
+    this.currentSpeedIndex = (this.currentSpeedIndex + 1) % this.playbackSpeeds.length;
+    const newSpeed = this.playbackSpeeds[this.currentSpeedIndex];
+    this.player.playbackRate = newSpeed;
+    
+    // Update button text
+    if (newSpeed === 1) {
+      this.controls.speedControl.textContent = '1×';
+    } else {
+      this.controls.speedControl.textContent = `${newSpeed}×`;
+    }
+  }
+
   updateBar() {
     const progress = this.player.currentTime / this.player.duration * 100;
     this.controls.soFar.style.width = progress + '%';
