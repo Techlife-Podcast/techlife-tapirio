@@ -19,8 +19,8 @@ block content
               | Пока нет вопросов от слушателей.
           else
             .table-responsive
-              table.table.table-striped.table-hover
-                thead.thead-dark
+              table.table.table-hover
+                thead
                   tr
                     th(scope="col") #
                     th(scope="col") Дата
@@ -57,7 +57,7 @@ block content
                           if question.question.length > 100
                             | ...
                             button.btn.btn-link.btn-sm.p-0.ml-1(onclick="toggleQuestion(this)") показать полностью
-                      td.small.text-muted #{question.ip}
+                      td #{question.ip}
 
   .spacer-lg
 
@@ -87,33 +87,3 @@ block content
       });
     });
 
-  style.
-    .question-preview {
-      max-width: 300px;
-      word-wrap: break-word;
-    }
-    
-    .table-responsive {
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-    
-    .table th {
-      border-top: none;
-      font-weight: 600;
-      background-color: #343a40;
-      color: white;
-    }
-    
-    .table-hover tbody tr:hover {
-      background-color: rgba(65, 202, 255, 0.1);
-    }
-    
-    .table-active {
-      background-color: rgba(65, 202, 255, 0.2) !important;
-    }
-    
-    .badge {
-      font-size: 0.85em;
-    }

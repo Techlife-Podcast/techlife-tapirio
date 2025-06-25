@@ -50,6 +50,57 @@ This is a Node.js/Express podcast website for "Techlife Podcast" (Техноло
 - Local development URL: http://localhost:3501 (as mentioned in README)
 - Pug templates located in `pages/` directory with partials in `pages/partials/`
 
+## Design System Guidelines
+
+### Typography Hierarchy
+The site uses a strict typography system defined in `scss/_variables.scss`:
+- **$font-s1**: 60px - Main headings (h2)
+- **$font-s2**: 32px - Section headings (h3)
+- **$font-s3**: 24px - Base text size (p, li, h4)
+- **$font-s4**: 20px - Small text, labels, forms
+- **$font-s5**: 16px - Smallest text, form hints
+
+**Base Font Rule**: Use `$font-s3` (24px) as the default for all body text. Large text is preferred throughout the site for better readability.
+
+### Color Variables
+Defined in `scss/_variables.scss` - **ALWAYS use these variables, never hardcode colors**:
+- **$accent**: #41caff - Primary brand color (buttons, links, highlights)
+- **$accent-darker**: #048BD8 - Secondary accent for variety
+- **$light-grey**: #ccc - Light text, borders
+- **$mid-grey**: #aaa - Medium contrast text
+- **$dark-grey**: #333 - Dark backgrounds, headers
+- **$black**: #111 - Main background color
+
+### Component Styling Patterns
+
+#### Forms
+- Use `$font-s4` for all form inputs and labels
+- Background: `rgba($dark-grey, 0.8)` with `$mid-grey` borders
+- Focus state: `$accent` border with subtle box-shadow
+- Consistent padding: `0.75rem`
+
+#### Tables
+- Headers: `$dark-grey` background with `$font-s4` text
+- Hover: `rgba($accent, 0.1)` background
+- Borders: `rgba($mid-grey, 0.3)`
+- All text: `$font-s4` minimum
+
+#### Cards & Badges
+- Card headers: `$accent` background
+- Badges: Use defined color classes (badge-primary, badge-secondary, etc.)
+- All text: `$font-s4` for consistency
+
+#### Bootstrap Integration
+- Override Bootstrap defaults in `scss/styles.scss`
+- Never add inline styles - use design system classes
+- Bootstrap conflicts resolved through proper SCSS imports
+
+### Development Rules
+1. **Never use inline styles** - all styling goes through SCSS compilation
+2. **No font-size overrides** - use the defined typography scale
+3. **Color consistency** - only use defined SCSS variables
+4. **Large text preference** - default to larger sizes for better UX
+
 ## Testing
 
 - Jest test framework configured
