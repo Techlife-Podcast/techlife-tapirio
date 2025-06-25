@@ -208,10 +208,18 @@ router.get("/voprosy", (req, res) => {
 // Handle question submissions
 router.post("/voprosy", async (req, res) => {
   try {
+    console.log('DEBUG: Received POST to /voprosy');
+    console.log('DEBUG: req.body:', req.body);
+    console.log('DEBUG: Content-Type:', req.get('Content-Type'));
+    
     const { name, email, question, category, privacy } = req.body;
+    
+    console.log('DEBUG: Extracted question:', JSON.stringify(question));
+    console.log('DEBUG: Question length:', question ? question.length : 'undefined');
     
     // Validate required fields
     if (!question || !question.trim()) {
+      console.log('DEBUG: Question validation failed');
       return res.status(400).json({ error: "Вопрос обязателен для заполнения" });
     }
     
