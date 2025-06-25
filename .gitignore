@@ -24,3 +24,6 @@ logs/
 
 # CSS maps
 *.css.map
+
+# User submissions
+listener-questions.json
