@@ -27,7 +27,16 @@ jobs:
             npm install
             # Build SCSS and assets with cache busting
             echo "🎨 Compiling SCSS..."
+            echo "📄 SCSS source file timestamp:"
+            ls -la scss/styles.scss
+            echo "📄 CSS file before build:"
+            ls -la public/stylesheets/styles.css || echo "CSS file doesn't exist yet"
+            # Remove existing CSS to force fresh compilation
+            rm -f public/stylesheets/styles.css
+            rm -f public/stylesheets/styles.css.map
             npm run sass-build
+            echo "📄 CSS file after build:"
+            ls -la public/stylesheets/styles.css
             echo "🔨 Building assets with cache busting..."
             npm run cache-bust
             # Show generated manifest for logging
