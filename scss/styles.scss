@@ -899,6 +899,18 @@ label {
     word-wrap: break-word;
 }
 
+// Mobile spacing for question form
+@media (max-width: $scr-width-sm) {
+    #question-form {
+        margin-bottom: 3rem;
+    }
+    
+    // Add bottom margin to dark-box on mobile (for "задать вопросы ведущим" block)
+    .dark-box {
+        margin-bottom: 2rem;
+    }
+}
+
 .table-active {
     background-color: rgba($accent, 0.2) !important;
 }
