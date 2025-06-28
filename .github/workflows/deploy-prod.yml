@@ -25,9 +25,11 @@ jobs:
             git pull origin master
             # Install all dependencies temporarily for building
             npm install
-            # Build assets with cache busting
+            # Build SCSS and assets with cache busting
+            echo "🎨 Compiling SCSS..."
+            npm run sass-build
             echo "🔨 Building assets with cache busting..."
-            npm run build
+            npm run cache-bust
             # Show generated manifest for logging
             if [ -f "public/asset-manifest.json" ]; then
               echo "📄 Generated asset manifest:"
