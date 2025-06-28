@@ -799,7 +799,26 @@ label {
         vertical-align: middle;
     }
     &.table-hover tbody tr:hover {
-        background-color: rgba($accent, 0.1);
+        background-color: rgba($accent, 0.25);
+        color: #fff;
+        transition: all 0.2s ease-in-out;
+        box-shadow: inset 0 0 0 1px rgba($accent, 0.3);
+        // Improve text contrast on hover
+        td {
+            color: #fff;
+        }
+        // Enhance badge visibility on hover
+        .badge {
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2);
+        }
+        // Make links more visible on hover
+        a {
+            color: #fff;
+            border-bottom-color: rgba(255, 255, 255, 0.6);
+            &:hover {
+                border-bottom-color: #fff;
+            }
+        }
     }
 }
 
