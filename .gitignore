@@ -27,3 +27,6 @@ logs/
 
 # User submissions
 listener-questions.json
+
+# Asset manifest (generated during build)
+public/asset-manifest.json

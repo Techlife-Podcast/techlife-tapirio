@@ -11,6 +11,10 @@ const sassMiddleware = require("sass-middleware");
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 
+// Cache busting for assets
+const CacheBuster = require('./scripts/cache-buster');
+const cacheBuster = new CacheBuster();
+
 const app = express();
 
 // view engine setup
@@ -54,6 +58,9 @@ async function initializeProject() {
   app.locals.episodes = episodes;
   app.locals.projectInfo = project.info;
   app.locals.projectInfo.currentYear = new Date().getFullYear();
+  
+  // Make cache buster available to templates
+  app.locals.assetUrl = (assetPath) => cacheBuster.getAssetUrl(assetPath);
 
   console.log('Application initialization complete.');
 }

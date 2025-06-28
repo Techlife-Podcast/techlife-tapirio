@@ -10,7 +10,9 @@
     "sass-build": "sass scss/styles.scss:public/stylesheets/styles.css --style compressed",
     "devstart": "nodemon ./bin/www-techlife",
     "serverstart": "DEBUG=tapirio:* npm run devstart",
-    "dev": "concurrently \"npm run devstart\" \"npm run sass\""
+    "dev": "concurrently \"npm run devstart\" \"npm run sass\"",
+    "build": "npm run sass-build && node scripts/build-assets.js",
+    "cache-bust": "node scripts/build-assets.js"
   },
   "jest": {
     "testEnvironment": "node",
