@@ -2,4 +2,17 @@
   .col-sm-12.mt-2
     p.nav-back
       | &#8592; 
-      a(href='javascript:history.back()') обратно
+      a(href='javascript:void(0)' onclick='goBack()') обратно
+
+script.
+  function goBack() {
+    // Check if there's browser history and if the previous page is from our domain
+    if (window.history.length > 1 && document.referrer && 
+        (document.referrer.includes(window.location.hostname) || 
+         document.referrer.includes('techlifepodcast.com'))) {
+      window.history.back();
+    } else {
+      // If no history or previous page is not from our site (like browser default), go to home
+      window.location.href = '/';
+    }
+  }
