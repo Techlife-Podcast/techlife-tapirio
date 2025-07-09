@@ -179,6 +179,9 @@ a.d-flex {
 a.d-flex:hover p {
   color: rgba(255, 255, 255, 0.7);
 }
+a.d-flex.dark-box {
+  border: 2px solid #aaa;
+}
 
 .nav-pill {
   display: inline-block;

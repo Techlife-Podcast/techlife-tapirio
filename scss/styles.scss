@@ -190,6 +190,10 @@ a.d-flex {
             color: rgba(255, 255, 255, 0.7);
         }
     }
+    // Preserve dark-box border when used as a link
+    &.dark-box {
+        border: 2px solid $mid-grey;
+    }
 }
 
 .nav-pill {
