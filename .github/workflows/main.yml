@@ -27,11 +27,8 @@ jobs:
         ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
 
     - name: Deploy to server
-      env:
-        HOST: ${{ secrets.HOST }}
-        USER: ${{ secrets.USERNAME }}
       run: |
-        ssh $USER@$HOST << 'ENDSSH'
+        ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} << 'ENDSSH'
           set -e
           cd /var/www/techlifepodcast.com
           git fetch origin master
