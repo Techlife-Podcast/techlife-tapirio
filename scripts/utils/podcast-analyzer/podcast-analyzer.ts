@@ -56,6 +56,7 @@ interface LLMConfig {
       maxRetries: number;
       baseDelayMs: number;
     };
+    presetCategories: string[];
   };
   prompts: {
     categoryExtraction: {
@@ -230,7 +231,16 @@ class PodcastAnalyzer {
           retrySettings: {
             maxRetries: 2,
             baseDelayMs: 2000
-          }
+          },
+          presetCategories: [
+            "Искусственный интеллект",
+            "Устройства и гаджеты", 
+            "Программное обеспечение",
+            "Конфиденциальность и безопасность",
+            "Технологические компании",
+            "Интернет и облачные сервисы",
+            "Будущее технологий"
+          ]
         },
         prompts: {
           categoryExtraction: {
@@ -282,6 +292,7 @@ class PodcastAnalyzer {
       .trim();
   }
 
+  // DEPRECATED: This method is no longer used since we now use preset categories from config
   private async extractCommonCategories(episodes: Episode[]): Promise<string[]> {
     const allDescriptions = episodes.map(ep => ep.description).join('\n\n');
     
@@ -550,11 +561,10 @@ Example response:
       console.log(`🔄 Processing specified range, ignoring previous progress`);
     }
 
-    // Extract categories if not already done
+    // Use preset categories from config
     if (this.commonCategories.length === 0) {
-      console.log('🏷️  Extracting common categories...');
-      // Use all episodes for category extraction, not just the filtered range
-      this.commonCategories = await this.extractCommonCategories(episodeRange ? allEpisodes : episodes);
+      console.log('🏷️  Using preset categories from configuration...');
+      this.commonCategories = this.config.analysis.presetCategories;
       console.log('📂 Categories:', this.commonCategories);
     }
 

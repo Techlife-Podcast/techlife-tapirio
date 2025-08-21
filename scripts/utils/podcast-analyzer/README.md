@@ -6,7 +6,7 @@ A TypeScript script that analyzes podcast descriptions using OpenAI to extract c
 
 ## Features
 
-- 🏷️ Extracts configurable number of common categories from all podcast episodes
+- 🏷️ Uses predefined categories for consistent episode tagging
 - 📝 Assigns configurable number of relevant tags per episode  
 - 💾 Saves analysis progress and can resume from interruptions
 - 🔄 Rate-limited OpenAI API calls to avoid hitting limits
@@ -49,7 +49,20 @@ The analyzer uses an LLM configuration file to control model settings and analys
     "maxCategories": 7,
     "maxTagsPerEpisode": 3,
     "rateLimitDelayMs": 1000,
-    "progressSaveInterval": 5
+    "progressSaveInterval": 5,
+    "retrySettings": {
+      "maxRetries": 2,
+      "baseDelayMs": 2000
+    },
+    "presetCategories": [
+      "Искусственный интеллект",
+      "Устройства и гаджеты",
+      "Программное обеспечение",
+      "Конфиденциальность и безопасность",
+      "Технологические компании",
+      "Интернет и облачные сервисы",
+      "Будущее технологий"
+    ]
   },
   "prompts": {
     "categoryExtraction": {
@@ -75,6 +88,7 @@ The analyzer uses an LLM configuration file to control model settings and analys
 - **analysis.retrySettings**: Retry configuration for failed API calls
   - **maxRetries**: Number of retry attempts (default: 2)
   - **baseDelayMs**: Base delay between retries in milliseconds (default: 2000)
+- **analysis.presetCategories**: Array of predefined categories to use for episode tagging
 - **prompts**: System messages and temperatures for different operations
 
 **Note**: The analyzer automatically handles model-specific parameter differences:
