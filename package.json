@@ -13,8 +13,8 @@
         "dev": "concurrently \"npm run devstart\" \"npm run sass\"",
         "build": "npm run sass-build && node scripts/build-assets.js",
         "cache-bust": "node scripts/build-assets.js",
-        "analyze-podcast": "npx ts-node scripts/podcast-analyzer.ts",
-        "test-feed": "node scripts/test-analyzer.js",
+        "analyze-podcast": "npx ts-node scripts/utils/podcast-analyzer/podcast-analyzer.ts",
+        "test-feed": "node scripts/utils/podcast-analyzer/test-analyzer.js",
         "tsc": "tsc --noEmit"
     },
     "jest": {

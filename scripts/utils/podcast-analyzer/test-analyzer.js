@@ -1,4 +1,4 @@
-// scripts/test-analyzer.js
+// scripts/utils/podcast-analyzer/test-analyzer.js
 // Simple test script to verify XML parsing works
 
 const fs = require('fs');
