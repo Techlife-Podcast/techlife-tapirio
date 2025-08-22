@@ -6,16 +6,16 @@ block content
     .blog-content
       include partials/_sec-nav
       .row
-        .col.col-lg-8
+        .col.col-lg-8.mb-2
           h2 Теги подкаста
           h3 Все темы эпизодов подкаста Технологии и жизнь
-          .my-5
-          p Здесь представлены все темы, которые обсуждаются в эпизодах подкаста. Нажмите на любой тег, чтобы увидеть соответствующие эпизоды.
+          
       .row
         .col-lg-10
-          .episode-tags.tags-cloud
-            - const maxCount = Math.max(...podcastTags.map(t => t.count))
-            - const minCount = Math.min(...podcastTags.map(t => t.count))
+          .episode-tags.tags-list
+            - const sortedTags = podcastTags.sort((a, b) => b.count - a.count)
+            - const maxCount = Math.max(...sortedTags.map(t => t.count))
+            - const minCount = Math.min(...sortedTags.map(t => t.count))
             - const getTagSize = (count) => {
             -   const ratio = (count - minCount) / (maxCount - minCount) || 0
             -   if (ratio >= 0.8) return 'tag-xl'
@@ -24,9 +24,10 @@ block content
             -   if (ratio >= 0.2) return 'tag-sm'
             -   return 'tag-xs'
             - }
-            each tagData in podcastTags
-              a.tag-link(href=`/tags/${encodeURIComponent(tagData.name)}`)
-                span.tag(class=getTagSize(tagData.count) data-count=tagData.count) #{tagData.name} (#{tagData.count})
+            each tagData in sortedTags
+              .tag-item
+                a.tag-link(href=`/tags/${encodeURIComponent(tagData.name)}`)
+                  span.tag(class=getTagSize(tagData.count)) #{tagData.name} (#{tagData.count})
           
           .mt-4
             p.text-muted
