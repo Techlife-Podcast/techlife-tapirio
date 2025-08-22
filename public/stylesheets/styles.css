@@ -1007,21 +1007,75 @@ label {
     font-size: 0.8rem;
     padding: 0.35rem 0.6rem;
   }
+  .episode-tags.tags-cloud {
+    gap: 0.5rem;
+  }
+  .episode-tags.tags-cloud .tag.tag-xs {
+    font-size: 0.65rem;
+    padding: 0.25rem 0.4rem;
+    transform: scale(0.75);
+  }
+  .episode-tags.tags-cloud .tag.tag-xs:hover {
+    transform: translateY(-1px) scale(0.8);
+    box-shadow: 0 3px 10px rgba(65, 202, 255, 0.3);
+  }
+  .episode-tags.tags-cloud .tag.tag-sm {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.5rem;
+    transform: scale(0.85);
+  }
+  .episode-tags.tags-cloud .tag.tag-sm:hover {
+    transform: translateY(-1px) scale(0.9);
+    box-shadow: 0 3px 10px rgba(65, 202, 255, 0.3);
+  }
+  .episode-tags.tags-cloud .tag.tag-md {
+    font-size: 0.85rem;
+    padding: 0.35rem 0.6rem;
+    transform: scale(0.9);
+  }
+  .episode-tags.tags-cloud .tag.tag-md:hover {
+    transform: translateY(-1px) scale(0.95);
+    box-shadow: 0 3px 10px rgba(65, 202, 255, 0.3);
+  }
+  .episode-tags.tags-cloud .tag.tag-lg {
+    font-size: 1rem;
+    padding: 0.4rem 0.7rem;
+    transform: scale(1);
+    font-weight: 600;
+  }
+  .episode-tags.tags-cloud .tag.tag-lg:hover {
+    transform: translateY(-1px) scale(1.05);
+    box-shadow: 0 3px 10px rgba(65, 202, 255, 0.3);
+  }
+  .episode-tags.tags-cloud .tag.tag-xl {
+    font-size: 1.1rem;
+    padding: 0.45rem 0.8rem;
+    transform: scale(1.1);
+    font-weight: 700;
+  }
+  .episode-tags.tags-cloud .tag.tag-xl:hover {
+    transform: translateY(-1px) scale(1.15);
+    box-shadow: 0 4px 12px rgba(65, 202, 255, 0.4);
+  }
 }
 .tag-link {
   text-decoration: none !important;
+  border: none !important;
 }
 .tag-link:hover {
   text-decoration: none !important;
+  border: none !important;
 }
 .tag-link .tag {
   text-decoration: none !important;
+  border: none !important;
 }
 
 .tags-cloud {
   gap: 0.8rem;
   margin: 2rem 0;
   justify-content: flex-start;
+  align-items: baseline;
 }
 .tags-cloud .tag-link {
   text-decoration: none !important;
@@ -1031,10 +1085,55 @@ label {
   padding: 0.5rem 0.8rem;
   transition: all 0.3s ease;
   position: relative;
+  line-height: 1.4;
 }
-.tags-cloud .tag-link .tag:hover {
+.tags-cloud .tag-link .tag.tag-xs {
+  font-size: 0.75rem;
+  padding: 0.3rem 0.5rem;
+  transform: scale(0.8);
+}
+.tags-cloud .tag-link .tag.tag-xs:hover {
+  transform: translateY(-2px) scale(0.85);
+  box-shadow: 0 4px 15px rgba(65, 202, 255, 0.3);
+}
+.tags-cloud .tag-link .tag.tag-sm {
+  font-size: 0.85rem;
+  padding: 0.4rem 0.65rem;
+  transform: scale(0.9);
+}
+.tags-cloud .tag-link .tag.tag-sm:hover {
+  transform: translateY(-2px) scale(0.95);
+  box-shadow: 0 4px 15px rgba(65, 202, 255, 0.3);
+}
+.tags-cloud .tag-link .tag.tag-md {
+  font-size: 1rem;
+  padding: 0.5rem 0.8rem;
+  transform: scale(1);
+}
+.tags-cloud .tag-link .tag.tag-md:hover {
   transform: translateY(-2px) scale(1.05);
   box-shadow: 0 4px 15px rgba(65, 202, 255, 0.3);
+}
+.tags-cloud .tag-link .tag.tag-lg {
+  font-size: 1.2rem;
+  padding: 0.6rem 1rem;
+  transform: scale(1.1);
+  font-weight: 600;
+}
+.tags-cloud .tag-link .tag.tag-lg:hover {
+  transform: translateY(-2px) scale(1.15);
+  box-shadow: 0 4px 15px rgba(65, 202, 255, 0.3);
+}
+.tags-cloud .tag-link .tag.tag-xl {
+  font-size: 1.4rem;
+  padding: 0.7rem 1.2rem;
+  transform: scale(1.25);
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(65, 202, 255, 0.2);
+}
+.tags-cloud .tag-link .tag.tag-xl:hover {
+  transform: translateY(-2px) scale(1.3);
+  box-shadow: 0 6px 20px rgba(65, 202, 255, 0.4);
 }
 .tags-cloud .tag-link:hover {
   text-decoration: none !important;

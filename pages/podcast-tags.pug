@@ -1,3 +1,4 @@
+//- pages/podcast-tags.pug - Tag cloud page with size scaling based on episode counts
 extends layout
 
 block content
@@ -13,9 +14,19 @@ block content
       .row
         .col-lg-10
           .episode-tags.tags-cloud
+            - const maxCount = Math.max(...podcastTags.map(t => t.count))
+            - const minCount = Math.min(...podcastTags.map(t => t.count))
+            - const getTagSize = (count) => {
+            -   const ratio = (count - minCount) / (maxCount - minCount) || 0
+            -   if (ratio >= 0.8) return 'tag-xl'
+            -   if (ratio >= 0.6) return 'tag-lg'
+            -   if (ratio >= 0.4) return 'tag-md'
+            -   if (ratio >= 0.2) return 'tag-sm'
+            -   return 'tag-xs'
+            - }
             each tagData in podcastTags
               a.tag-link(href=`/tags/${encodeURIComponent(tagData.name)}`)
-                span.tag #{tagData.name} (#{tagData.count})
+                span.tag(class=getTagSize(tagData.count) data-count=tagData.count) #{tagData.name} (#{tagData.count})
           
           .mt-4
             p.text-muted
