@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  .container.page
+    .blog-content
+      include partials/_sec-nav
+      .row
+        .col.col-lg-8
+          h2 Теги подкаста
+          h3 Все темы эпизодов подкаста Технологии и жизнь
+          .my-5
+          p Здесь представлены все темы, которые обсуждаются в эпизодах подкаста. Нажмите на любой тег, чтобы увидеть соответствующие эпизоды.
+      .row
+        .col-lg-10
+          .episode-tags.tags-cloud
+            each tagData in podcastTags
+              a.tag-link(href=`/tags/${encodeURIComponent(tagData.name)}`)
+                span.tag #{tagData.name} (#{tagData.count})
+          
+          .mt-4
+            p.text-muted
+              | Всего тегов: 
+              strong.text-white #{podcastTags.length}
+
+  .mt-5
+  include partials/_banner-telegram
+
+  .spacer-lg
+  include partials/header
+
+  include partials/footer

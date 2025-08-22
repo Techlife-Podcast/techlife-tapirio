@@ -1,0 +1,50 @@
+extends layout
+
+block content
+  .container.page
+    .blog-content
+      .row.mt-5
+        .col-sm-12.mt-2
+          p.nav-back
+            | &#8592; 
+            a(href='/tags' onclick='') обратно
+      .row
+        .col.col-lg-8
+          h2 #{tag}
+          h3 #{episodes.length} эпизод#{episodes.length === 1 ? '' : (episodes.length < 5 ? 'а' : 'ов')}
+          .my-5
+          p Все эпизоды подкаста, которые содержат тег "#{tag}". Каждый эпизод может содержать несколько тегов для лучшей навигации по темам.
+      .row
+        .col-lg-10
+          if episodes && episodes.length > 0
+            .episodes-by-tag
+              each episode in episodes
+                .episode-item.mb-4.p-3
+                  .episode-meta
+                    h3.episode-title
+                      a(href=`/episodes/${episode.episodeNum}`) №#{episode.episodeNum} #{episode.title}
+                    
+                    if episode.pubDateConverted
+                      p.episode-date.text-muted.mb-2 #{episode.pubDateConverted}
+                    
+                    if episode['itunes:subtitle']
+                      p.episode-subtitle.mb-2 #{episode['itunes:subtitle']}
+                    
+                    if episode.tags && episode.tags.length > 1
+                      .episode-other-tags.episode-tags
+                        each otherTag, index in episode.tags
+                          if otherTag !== tag
+                            a.tag-link(href=`/tags/${encodeURIComponent(otherTag)}`)
+                              span.tag #{otherTag}
+          else
+            .no-episodes.text-center.py-5
+              p.lead Эпизодов с этим тегом не найдено
+              a.btn.btn-primary(href="/tags") Посмотреть все теги
+
+  .mt-5
+  include partials/_banner-telegram
+
+  .spacer-lg
+  include partials/header
+
+  include partials/footer

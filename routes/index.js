@@ -167,27 +167,61 @@ router.get("/episodes/:id", (req, res, next) => {
     }
 });
 
+// Function to get all unique tags from episodes with counts
+function getAllPodcastTags() {
+    const tagCounts = {};
+    episodes.forEach(episode => {
+        if (episode.tags && episode.tags.length > 0) {
+            episode.tags.forEach(tag => {
+                tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+            });
+        }
+    });
+
+    // Convert to array of objects with tag name and count, sorted alphabetically
+    return Object.entries(tagCounts)
+        .map(([tag, count]) => ({ name: tag, count }))
+        .sort((a, b) => a.name.localeCompare(b.name));
+}
+
+// Function to get episodes by tag
+function getEpisodesByTag(tagName) {
+    return episodes.filter(episode =>
+        episode.tags && episode.tags.includes(tagName)
+    ).sort((a, b) => parseInt(b.episodeNum) - parseInt(a.episodeNum)); // Sort by episode number, newest first
+}
+
 router.get("/tags", (req, res) => {
-    res.render("tags", {
-        tags: project.tags,
+    const podcastTags = getAllPodcastTags();
+
+    res.render("podcast-tags", {
+        podcastTags,
         isHeroParallax: true,
-        heroImg: DEFAULT_IMAGE,
+        heroImg: "/images/bg-lightning.jpg",
         projectInfo,
         path: req.path,
+        pageTitle: "Теги подкаста",
+        pageDescription: "Все теги эпизодов подкаста Технологии и жизнь"
     });
 });
 
 router.get("/tags/:tag", async(req, res) => {
     const { tag } = req.params;
-    const articles = await project.getPostsByTag(tag);
-    res.render("tag", {
+    const taggedEpisodes = getEpisodesByTag(tag);
+
+    if (taggedEpisodes.length === 0) {
+        return res.status(404).render("404");
+    }
+
+    res.render("podcast-tag", {
         tag,
-        tags: project.tags,
+        episodes: taggedEpisodes,
         isHeroParallax: true,
-        heroImg: DEFAULT_IMAGE,
-        articles,
+        heroImg: "/images/bg-lightning.jpg",
         projectInfo,
         path: req.path,
+        pageTitle: `Эпизоды по тегу: ${tag}`,
+        pageDescription: `Все эпизоды подкаста с тегом "${tag}"`
     });
 });
 
@@ -206,8 +240,7 @@ router.get("/api/search", cors(), (req, res) => {
     const results = search ?
         project.posts.filter((a) =>
             (a.title + a.description + a.author).toLowerCase().includes(search)
-        ) :
-        [];
+        ) : [];
     res.json(results);
 });
 

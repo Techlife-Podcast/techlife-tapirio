@@ -15,7 +15,8 @@ block content
         if episode.tags && episode.tags.length > 0
           .episode-tags.mt-4.mb-6
             each tag in episode.tags
-              span.tag #{tag}
+              a.tag-link(href=`/tags/${encodeURIComponent(tag)}`)
+                span.tag #{tag}
         
         .player.my-3
           .btn-play Play

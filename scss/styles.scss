@@ -979,3 +979,115 @@ label {
         }
     }
 }
+
+// Tag links styling
+.tag-link {
+    text-decoration: none !important;
+    &:hover {
+        text-decoration: none !important;
+    }
+    .tag {
+        text-decoration: none !important;
+    }
+}
+
+// Tags cloud page styling
+.tags-cloud {
+    gap: 0.8rem;
+    margin: 2rem 0;
+    justify-content: flex-start;
+    .tag-link {
+        text-decoration: none !important;
+        .tag {
+            font-size: 0.9rem;
+            padding: 0.5rem 0.8rem;
+            transition: all 0.3s ease;
+            position: relative;
+            &:hover {
+                transform: translateY(-2px) scale(1.05);
+                box-shadow: 0 4px 15px rgba($accent, 0.3);
+            }
+        }
+        &:hover {
+            text-decoration: none !important;
+        }
+    }
+}
+
+// Individual tag page styling - using standard header pattern
+// Breadcrumb navigation removed - using standard nav-back pattern
+.episodes-by-tag {
+    .episode-item {
+        background: linear-gradient(135deg, rgba(white, 0.02), rgba(white, 0.01));
+        border-left: 4px solid $accent;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        position: relative;
+        overflow: hidden;
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, $accent, transparent);
+            opacity: 0.5;
+        }
+        &:hover {
+            background: linear-gradient(135deg, rgba(white, 0.05), rgba(white, 0.03));
+            transform: translateX(8px) translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            border-left-color: lighten($accent, 10%);
+        }
+        .episode-meta {
+            position: relative;
+        }
+        .episode-title {
+            margin-bottom: 0.8rem;
+            a {
+                color: white;
+                text-decoration: none !important;
+                font-size: 1.25rem;
+                font-weight: 500;
+                line-height: 1.3;
+                transition: color 0.2s ease;
+                &:hover {
+                    color: $accent;
+                    text-decoration: none !important;
+                }
+            }
+        }
+        .episode-date {
+            font-size: 0.85rem;
+            opacity: 0.6;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .episode-subtitle {
+            color: rgba(white, 0.8);
+            font-size: 0.95rem;
+            line-height: 1.4;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+        .episode-other-tags {
+            font-size: 0.85rem;
+            color: rgba(white, 0.7);
+            margin-top: 1rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid rgba(white, 0.1);
+        }
+    }
+}
+
+.no-episodes {
+    color: rgba(white, 0.7);
+    .btn {
+        margin-top: 1rem;
+    }
+}

@@ -18,7 +18,8 @@ block content
               if item.tags && item.tags.length > 0
                 .episode-tags.mt-2.mb-3
                   each tag in item.tags
-                    span.tag #{tag}
+                    a.tag-link(href=`/tags/${encodeURIComponent(tag)}`)
+                      span.tag #{tag}
               .selected-box
 
   include partials/footer
