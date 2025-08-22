@@ -15,6 +15,10 @@ block content
                 span.episode-num №#{item.episodeNum}
                 |  
                 span.show-episode.pseudo-link #{item.title}
+              if item.tags && item.tags.length > 0
+                .episode-tags.mt-2.mb-3
+                  each tag in item.tags
+                    span.tag #{tag}
               .selected-box
 
   include partials/footer

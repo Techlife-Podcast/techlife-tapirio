@@ -945,3 +945,37 @@ label {
     border-radius: 50%;
     display: inline-block;
 }
+
+// Episode tags styling
+.episode-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    .tag {
+        background-color: $accent;
+        color: $black;
+        font-size: 1.1rem;
+        font-weight: 500;
+        padding: 0.4rem 0.75rem;
+        border-radius: 10px;
+        white-space: nowrap;
+        border: none;
+        &:hover {
+            background-color: lighten($accent, 10%);
+            transform: translateY(-1px);
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+    }
+}
+
+// Mobile responsive tags
+@media (max-width: $scr-width-sm) {
+    .episode-tags {
+        gap: 0.4rem;
+        .tag {
+            font-size: 0.8rem;
+            padding: 0.35rem 0.6rem;
+        }
+    }
+}

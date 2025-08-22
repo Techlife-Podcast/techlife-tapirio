@@ -67,7 +67,7 @@ a:hover,
   cursor: pointer;
   color: #fff;
   text-decoration: none;
-  border-bottom-color: #4d4d4d;
+  border-bottom-color: rgb(76.5, 76.5, 76.5);
 }
 
 a.link-ext {
@@ -409,12 +409,12 @@ a.d-flex.dark-box {
 }
 
 .btn-secondary {
-  background-color: #009dda;
+  background-color: rgb(0, 157.1894736842, 218);
   color: white;
-  border-color: #009dda;
+  border-color: rgb(0, 157.1894736842, 218);
 }
 .btn-secondary:hover {
-  background-color: #005474;
+  background-color: rgb(0, 83.6421052632, 116);
 }
 
 .btn-lg {
@@ -854,7 +854,7 @@ label {
 }
 .alert.alert-info {
   background-color: rgba(65, 202, 255, 0.15);
-  color: #a7e6ff;
+  color: rgb(167, 230.4526315789, 255);
   border-left: 4px solid #41caff;
 }
 
@@ -975,6 +975,38 @@ label {
   background-color: #41caff;
   border-radius: 50%;
   display: inline-block;
+}
+
+.episode-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.episode-tags .tag {
+  background-color: #41caff;
+  color: #111;
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 0.4rem 0.75rem;
+  border-radius: 10px;
+  white-space: nowrap;
+  border: none;
+}
+.episode-tags .tag:hover {
+  background-color: rgb(116, 216.2263157895, 255);
+  transform: translateY(-1px);
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 639px) {
+  .episode-tags {
+    gap: 0.4rem;
+  }
+  .episode-tags .tag {
+    font-size: 0.8rem;
+    padding: 0.35rem 0.6rem;
+  }
 }
 
 /*# sourceMappingURL=styles.css.map */
