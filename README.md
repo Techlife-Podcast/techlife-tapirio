@@ -16,6 +16,7 @@ Proceed to [http://localhost:3501](http://localhost:3501)
 ```bash
 npm run build        # Компилирует SCSS + генерирует манифест assets
 npm run cache-bust   # Обновляет хеши для cache busting
+npm run sass-build   # Перекомпилирует Sass
 ```
 
 **Cache Busting**: Система автоматически версионирует CSS/JS файлы для предотвращения кеширования устаревших ресурсов. В разработке используются timestamp'ы, в продакшне - хеши содержимого файлов.
