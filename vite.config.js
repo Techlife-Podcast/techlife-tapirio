@@ -45,6 +45,8 @@ export default defineConfig({
 
     // Configure CSS processing
     css: {
+        // PostCSS configuration is automatically picked up from postcss.config.js
+        postcss: true,
         preprocessorOptions: {
             scss: {
                 // Enable modern sass API

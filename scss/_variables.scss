@@ -1,23 +1,30 @@
-/* Font sizes */
+/* Modern CSS Custom Properties - Fully migrated from SCSS variables */
 
-$font-s1: 60px;
-$font-s2: 32px;
-$font-s3: 24px;
-$font-s4: 20px;
-$font-s5: 16px;
-
-/* Colors */
-
-$accent: #41caff;
-$accent-darker: #048BD8;
-$light-grey: #ccc;
-$mid-grey: #aaa;
-$dark-grey: #333;
-$black: #111;
-
-$min-scr-width: 320px;
-$scr-width-xs:  479px;
-$scr-width-sm:  639px;
-$scr-width-md:  1023px;
-$scr-width-lg:  1279px;
-$max-scr-width: 1890px;
+:root {
+    /* Font sizes - converted from SCSS variables */
+    --font-s1: 60px;
+    --font-s2: 32px;
+    --font-s3: 24px;
+    --font-s4: 20px;
+    --font-s5: 16px;
+    /* Colors - converted from SCSS variables */
+    --accent: #41caff;
+    --accent-darker: #048BD8;
+    --light-grey: #ccc;
+    --mid-grey: #aaa;
+    --dark-grey: #333;
+    --black: #111;
+    /* Breakpoints - converted from SCSS variables */
+    --min-scr-width: 320px;
+    --scr-width-xs: 479px;
+    --scr-width-sm: 639px;
+    --scr-width-md: 1023px;
+    --scr-width-lg: 1279px;
+    --max-scr-width: 1890px;
+    /* Enhanced modern CSS features */
+    --accent-hover: color-mix(in srgb, var(--accent) 80%, white);
+    --accent-active: color-mix(in srgb, var(--accent) 90%, black);
+    --accent-light: color-mix(in srgb, var(--accent) 25%, transparent);
+    --background-overlay: color-mix(in srgb, var(--black) 60%, transparent);
+    --light-grey-darker: color-mix(in srgb, var(--light-grey) 50%, black);
+}

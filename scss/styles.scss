@@ -4,8 +4,11 @@
 @import "bootstrap/_breakpoints.scss";
 @import "_variables.scss";
 @import "_mixins.scss";
+
+/* Note: CSS Custom Properties are now centralized in _variables.scss */
+
 body {
-    background-color: $black;
+    background-color: var(--black);
     background-position: center top;
     background-size: 100%;
     background-repeat: no-repeat;
@@ -22,7 +25,7 @@ body {
     }
 }
 
-@media (max-width: $min-scr-width) {
+@media (max-width: var(--min-scr-width)) {
     body {
         background-position: calc(100% - 0px) top;
         background-size: 130%;
@@ -39,7 +42,7 @@ body {
 
 p,
 li {
-    font-size: $font-s3;
+    font-size: var(--font-s3);
     color: #f2f2f2;
     line-height: 1.6;
 }
@@ -55,7 +58,7 @@ p {
 }
 
 p.small {
-    font-size: $font-s4;
+    font-size: var(--font-s4);
 }
 
 b,
@@ -66,17 +69,17 @@ strong {
 a,
 .pseudo-link {
     color: #fff;
-    border-bottom: 1px solid $light-grey;
+    border-bottom: 1px solid var(--light-grey);
     &:hover {
         cursor: pointer;
         color: #fff;
         text-decoration: none;
-        border-bottom-color: darken($light-grey, 50%);
+        border-bottom-color: var(--light-grey-darker);
     }
 }
 
 a.link-ext {
-    color: $black;
+    color: var(--black);
     background: #fff;
     border: none;
 }
@@ -97,14 +100,14 @@ h1 {
 h2 {
     font-weight: 600;
     line-height: 1;
-    font-size: $font-s1;
-    color: $accent;
+    font-size: var(--font-s1);
+    color: var(--accent);
     text-shadow: #000000ee 1px 1px 0;
     margin-top: 1.8vw;
 }
 
 h3 {
-    font-size: $font-s2;
+    font-size: var(--font-s2);
     font-weight: 600;
     .small-caps {
         font-size: 80%;
@@ -117,7 +120,7 @@ h3 {
 }
 
 h4 {
-    font-size: $font-s3;
+    font-size: var(--font-s3);
     font-weight: 600;
 }
 
@@ -132,39 +135,39 @@ h3+h2 {
 }
 
 // font sizes XS
-@media screen and (min-width: $max-scr-width) {
+@media screen and (min-width: var(--max-scr-width)) {
     h1 {
         font-size: 9.2vw;
     }
 }
 
-@media (min-width: $min-scr-width) and (max-width: $scr-width-sm) {
+@media (min-width: var(--min-scr-width)) and (max-width: var(--scr-width-sm)) {
     p,
     li {
-        font-size: $font-s4;
+        font-size: var(--font-s4);
     }
     h1 {
         font-size: 9.4vw;
     }
     h2 {
-        font-size: $font-s2;
+        font-size: var(--font-s2);
     }
     h3 {
-        font-size: $font-s3;
+        font-size: var(--font-s3);
         .small-caps {
             font-size: 66%;
         }
     }
     h4 {
-        font-size: $font-s4;
+        font-size: var(--font-s4);
         font-weight: 600;
     }
 }
 
 // font sizes SM
-@media (min-width: $scr-width-xs) and (max-width: $scr-width-sm) {
+@media (min-width: var(--scr-width-xs)) and (max-width: var(--scr-width-sm)) {
     h2 {
-        font-size: $font-s3;
+        font-size: var(--font-s3);
     }
 }
 
@@ -173,7 +176,7 @@ pre {
 }
 
 .master-container {
-    max-width: $max-scr-width;
+    max-width: var(--max-scr-width);
     margin: 0 auto;
 }
 
@@ -192,40 +195,46 @@ a.d-flex {
     }
     // Preserve dark-box border when used as a link
     &.dark-box {
-        border: 2px solid $mid-grey;
+        border: 2px solid var(--mid-grey);
     }
 }
 
+
+/* Modern CSS Example 2: Native CSS Nesting (no preprocessor needed) */
+
 .nav-pill {
     display: inline-block;
-    background-color: $dark-grey;
+    background-color: var(--dark-grey);
     text-decoration: none;
     border: 0;
     border-radius: 3px;
-    color: $light-grey;
+    color: var(--light-grey);
     padding: 8px 20px;
     line-height: 1;
     font-weight: 600;
     letter-spacing: 0.07rem;
-    svg {
+    /* Modern CSS nesting - works directly in browsers */
+    & svg {
         margin: -5px 0 0;
     }
+    /* Nested hover state with modern color mixing */
     &:hover:not(.active) {
-        svg {
-            path {
-                fill: #fff;
-            }
-        }
+        background-color: var(--accent-hover);
     }
+    &:hover:not(.active) svg path {
+        fill: #fff !important;
+    }
+    /* Active state using CSS custom properties */
     &.active {
-        color: $accent;
-        path {
-            fill: $accent;
-        }
+        color: var(--accent-color);
+        background-color: var(--accent-active);
+    }
+    &.active path {
+        fill: #fff !important;
     }
 }
 
-@media screen and (max-width: $scr-width-sm) {
+@media screen and (max-width: var(--scr-width-sm)) {
     .top-nav {
         padding: 0;
     }
@@ -240,8 +249,8 @@ a.d-flex {
     list-style: none;
     margin: 20px 0 0;
     padding: 0;
-    font-size: $font-s3;
-    color: $mid-grey;
+    font-size: var(--font-s3);
+    color: var(--mid-grey);
     li {
         position: relative;
         padding-left: 75px;
@@ -252,7 +261,7 @@ a.d-flex {
             padding: 25px 25px 25px 120px;
             margin-left: -25px;
             margin-right: -25px;
-            margin-bottom: $font-s2;
+            margin-bottom: var(--font-s2);
             .num-and-title {
                 display: none;
             }
@@ -276,10 +285,18 @@ a.d-flex {
     }
 }
 
+
+/* Modern CSS Example 1: Using CSS custom properties with color-mix() */
+
 .dark-box,
 .episode-list li.selected {
-    border: 2px solid $mid-grey;
-    background-color: rgba(0, 0, 0, 0.6);
+    border: 2px solid var(--mid-grey);
+    /* Modern color-mix creates consistent semi-transparent backgrounds */
+    background-color: var(--background-overlay);
+    /* Enhanced with modern CSS features */
+    &:hover {
+        border-color: var(--accent-hover);
+    }
 }
 
 .date {
@@ -305,9 +322,9 @@ a.d-flex {
 }
 
 // font sizes XS
-@media (min-width: $min-scr-width) and (max-width: $scr-width-sm) {
+@media (min-width: var(--min-scr-width)) and (max-width: var(--scr-width-sm)) {
     .episode-list {
-        font-size: $font-s4;
+        font-size: var(--font-s4);
     }
 }
 
@@ -330,14 +347,14 @@ a.d-flex {
 
 .episode-desc {
     position: relative;
-    font-size: $font-s3;
-    color: $mid-grey;
+    font-size: var(--font-s3);
+    color: var(--mid-grey);
     >p {
         width: calc(100% - 100px);
     }
     p {
         line-height: 1.35;
-        color: $light-grey;
+        color: var(--light-grey);
         &:last-of-type {
             margin-bottom: 0;
         }
@@ -350,7 +367,7 @@ a.d-flex {
             padding-left: 0;
             margin-left: 20px;
             margin-bottom: 10px;
-            color: $light-grey;
+            color: var(--light-grey);
             line-height: 1.55;
             a {
                 b {
@@ -365,7 +382,7 @@ a.d-flex {
     }
 }
 
-@media (max-width: $scr-width-sm) {
+@media (max-width: var(--scr-width-sm)) {
     .episode-desc {
         >p {
             width: auto;
@@ -373,19 +390,19 @@ a.d-flex {
     }
 }
 
-@media (min-width: $min-scr-width) and (max-width: $scr-width-sm) {
+@media (min-width: var(--min-scr-width)) and (max-width: var(--scr-width-sm)) {
     .episode-desc {
-        font-size: $font-s4;
+        font-size: var(--font-s4);
     }
 }
 
-@media (max-width: $min-scr-width) {
+@media (max-width: var(--min-scr-width)) {
     .spacer-xs {
         height: 25vw;
     }
 }
 
-@media (min-width: $min-scr-width) and (max-width: 768px) {
+@media (min-width: var(--min-scr-width)) and (max-width: 768px) {
     .spacer-sm {
         height: 20vw;
     }
@@ -409,7 +426,7 @@ a.d-flex {
     list-style-position: outside;
 }
 
-@media (min-width: $scr-width-sm) {
+@media (min-width: var(--scr-width-sm)) {
     .nav-back {
         margin-left: -1.9rem;
     }
@@ -418,10 +435,10 @@ a.d-flex {
 .footer .row {
     margin: 80px 0 0;
     p {
-        font-size: $font-s4;
-        color: $mid-grey;
-        @media screen and (max-width: $scr-width-sm) {
-            font-size: $font-s5;
+        font-size: var(--font-s4);
+        color: var(--mid-grey);
+        @media screen and (max-width: var(--scr-width-sm)) {
+            font-size: var(--font-s5);
         }
     }
 }
@@ -433,22 +450,22 @@ a.d-flex {
 }
 
 .btn-primary {
-    background-color: $accent;
-    color: $black;
-    border-color: $accent;
+    background-color: var(--accent);
+    color: var(--black);
+    border-color: var(--accent);
 }
 
 .btn-secondary {
-    background-color: darken($accent, 20%);
+    background-color: var(--accent-active);
     color: white;
-    border-color: darken($accent, 20%);
+    border-color: var(--accent-active);
     &:hover {
-        background-color: darken($accent, 40%);
+        background-color: color-mix(in srgb, var(--accent) 60%, black);
     }
 }
 
 .btn-lg {
-    font-size: $font-s3;
+    font-size: var(--font-s3);
 }
 
 .btn-play {
@@ -474,7 +491,7 @@ a.d-flex {
             right: 1px;
             top: 1px;
             bottom: 1px;
-            border: 3px dotted $black;
+            border: 3px dotted var(--black);
             border-radius: 50%;
             animation: rotating 20s linear infinite;
         }
@@ -508,7 +525,7 @@ a.d-flex {
 
 // Episode Nav
 .episode-nav {
-    font-size: $font-s4;
+    font-size: var(--font-s4);
     padding: 0 50px;
     a {
         border: 0;
@@ -532,9 +549,9 @@ a.d-flex {
         }
     }
     .num {
-        color: $accent;
+        color: var(--accent);
     }
-    @media (max-width: $scr-width-sm) {
+    @media (max-width: var(--scr-width-sm)) {
         padding: 0 25px;
         a {
             .arrow {
@@ -563,7 +580,7 @@ a.d-flex {
     columns: 2;
     li {
         margin-bottom: .8rem;
-        font-size: $font-s4;
+        font-size: var(--font-s4);
         display: inline-block;
         width: 100%;
         a {
@@ -575,7 +592,7 @@ a.d-flex {
                 transition: all 0.1s ease-in-out;
             }
             span {
-                border-bottom: 1px solid $light-grey;
+                border-bottom: 1px solid var(--light-grey);
                 transition: all 0.1s ease-in-out;
             }
             &:hover {
@@ -590,15 +607,15 @@ a.d-flex {
     }
 }
 
-@media (max-width: $scr-width-sm) {
+@media (max-width: var(--scr-width-sm)) {
     .sub-list {
         li {
-            font-size: $font-s5;
+            font-size: var(--font-s5);
         }
     }
 }
 
-@media screen and (min-width: $scr-width-sm) and (max-width: 991px) {
+@media screen and (min-width: var(--scr-width-sm)) and (max-width: 991px) {
     .sub-list {
         columns: 3;
         -webkit-columns: 3;
@@ -606,7 +623,7 @@ a.d-flex {
     }
 }
 
-@media screen and (min-width: 992px) and (max-width: $scr-width-lg) {
+@media screen and (min-width: 992px) and (max-width: var(--scr-width-lg)) {
     .sub-list {
         columns: 1;
         -webkit-columns: 1;
@@ -651,7 +668,7 @@ a.d-flex {
         top: 0;
         bottom: 0;
         width: 0;
-        background-color: $accent;
+        background-color: var(--accent);
         border-radius: 50px 0 0 50px;
     }
 }
@@ -672,24 +689,24 @@ blockquote {
 }
 
 .banner {
-    background-color: $light-grey;
+    background-color: var(--light-grey);
     p {
-        font-size: $font-s4;
-        color: $dark-grey;
+        font-size: var(--font-s4);
+        color: var(--dark-grey);
     }
 }
 
-@media (max-width: $scr-width-sm) {
+@media (max-width: var(--scr-width-sm)) {
     .banner {
         p {
-            font-size: $font-s5;
+            font-size: var(--font-s5);
         }
     }
 }
 
 .with-bg {
     padding: 0.35rem 0.5rem;
-    background-color: $dark-grey;
+    background-color: var(--dark-grey);
     color: white;
     display: inline-block;
 }
@@ -697,7 +714,7 @@ blockquote {
 .callout {
     padding: 2rem;
     margin: auto -2rem;
-    border: 1px solid $light-grey;
+    border: 1px solid var(--light-grey);
     p {
         color: white;
         &:last-child {
@@ -708,14 +725,14 @@ blockquote {
         margin-bottom: 0.5rem;
     }
     &.accented {
-        background-color: $accent;
+        background-color: var(--accent);
         border: 0;
         p,
         li {
-            color: $black;
+            color: var(--black);
         }
     }
-    @media (max-width: $scr-width-sm) {
+    @media (max-width: var(--scr-width-sm)) {
         margin: auto -0.9rem;
     }
 }
@@ -738,20 +755,20 @@ img.hero-image {
 }
 
 .form-control {
-    background-color: rgba($dark-grey, 0.8);
-    border: 1px solid $mid-grey;
+    background-color: color-mix(in srgb, var(--dark-grey) 80%, transparent);
+    border: 1px solid var(--mid-grey);
     color: #f2f2f2;
-    font-size: $font-s4;
+    font-size: var(--font-s4);
     padding: 0.75rem;
     border-radius: 3px;
     &:focus {
-        background-color: rgba($dark-grey, 0.9);
-        border-color: $accent;
-        box-shadow: 0 0 0 0.2rem rgba($accent, 0.25);
+        background-color: color-mix(in srgb, var(--dark-grey) 90%, transparent);
+        border-color: var(--accent);
+        box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--accent) 25%, transparent);
         color: #fff;
     }
     &::placeholder {
-        color: $mid-grey;
+        color: var(--mid-grey);
     }
 }
 
@@ -761,16 +778,16 @@ textarea.form-control {
 }
 
 label {
-    font-size: $font-s4;
-    color: $light-grey;
+    font-size: var(--font-s4);
+    color: var(--light-grey);
     font-weight: 600;
     margin-bottom: 0.5rem;
     display: block;
 }
 
 .form-text {
-    font-size: $font-s5;
-    color: $mid-grey;
+    font-size: var(--font-s5);
+    color: var(--mid-grey);
     margin-top: 0.25rem;
 }
 
@@ -779,8 +796,8 @@ label {
         margin-top: 0.25rem;
     }
     .form-check-label {
-        font-size: $font-s4;
-        color: $light-grey;
+        font-size: var(--font-s4);
+        color: var(--light-grey);
         margin-left: 0.25rem;
     }
 }
@@ -788,25 +805,25 @@ label {
 // Tables - matching site design system  
 .table {
     color: #f2f2f2;
-    font-size: $font-s4;
+    font-size: var(--font-s4);
     th {
-        background-color: $dark-grey;
+        background-color: var(--dark-grey);
         color: #fff;
-        font-size: $font-s4;
+        font-size: var(--font-s4);
         font-weight: 600;
-        border-color: $mid-grey;
+        border-color: var(--mid-grey);
         padding: 1rem 0.75rem;
     }
     td {
-        border-color: rgba($mid-grey, 0.3);
+        border-color: color-mix(in srgb, var(--mid-grey) 30%, transparent);
         padding: 0.75rem;
         vertical-align: middle;
     }
     &.table-hover tbody tr:hover {
-        background-color: rgba($accent, 0.25);
+        background-color: color-mix(in srgb, var(--accent) 25%, transparent);
         color: #fff;
         transition: all 0.2s ease-in-out;
-        box-shadow: inset 0 0 0 1px rgba($accent, 0.3);
+        box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 30%, transparent);
         // Improve text contrast on hover
         td {
             color: #fff;
@@ -830,38 +847,38 @@ label {
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba($mid-grey, 0.3);
+    border: 1px solid color-mix(in srgb, var(--mid-grey) 30%, transparent);
 }
 
 // Cards - simplified and consistent
 .card {
-    background-color: rgba($dark-grey, 0.8);
-    border: 1px solid $mid-grey;
+    background-color: color-mix(in srgb, var(--dark-grey) 80%, transparent);
+    border: 1px solid var(--mid-grey);
     border-radius: 8px;
     .card-header {
-        background-color: $accent-darker;
-        border-bottom: 1px solid $accent;
+        background-color: var(--accent-darker);
+        border-bottom: 1px solid var(--accent);
         color: #fff;
-        font-size: $font-s4;
+        font-size: var(--font-s4);
         font-weight: 600;
         padding: 1rem;
         h5,
         .card-title {
             color: #fff;
             margin: 0;
-            font-size: $font-s4;
+            font-size: var(--font-s4);
         }
     }
     .card-body {
         padding: 1.5rem;
-        background-color: rgba($accent, 0.05);
+        background-color: color-mix(in srgb, var(--accent) 5%, transparent);
         ul {
             margin: 0;
             padding: 0;
             list-style: none;
             li {
-                font-size: $font-s4;
-                color: $light-grey;
+                font-size: var(--font-s4);
+                color: var(--light-grey);
                 margin-bottom: 0.75rem;
                 &:last-child {
                     margin-bottom: 0;
@@ -877,26 +894,26 @@ label {
     font-weight: 600;
     padding: 0.35em 0.65em;
     &.badge-primary {
-        background-color: $accent;
+        background-color: var(--accent);
         color: #fff;
     }
     &.badge-secondary {
-        background-color: $mid-grey;
+        background-color: var(--mid-grey);
         color: #fff;
     }
     &.badge-info {
-        background-color: $accent-darker;
+        background-color: var(--accent-darker);
         color: #fff;
     }
     &.badge-light {
-        background-color: $light-grey;
-        color: $dark-grey;
+        background-color: var(--light-grey);
+        color: var(--dark-grey);
     }
 }
 
 // Alerts - matching site style
 .alert {
-    font-size: $font-s4;
+    font-size: var(--font-s4);
     border-radius: 3px;
     border: none;
     &.alert-success {
@@ -910,9 +927,9 @@ label {
         border-left: 4px solid #dc3545;
     }
     &.alert-info {
-        background-color: rgba($accent, 0.15);
-        color: lighten($accent, 20%);
-        border-left: 4px solid $accent;
+        background-color: color-mix(in srgb, var(--accent) 15%, transparent);
+        color: var(--accent-hover);
+        border-left: 4px solid var(--accent);
     }
 }
 
@@ -923,7 +940,7 @@ label {
 }
 
 // Mobile spacing for question form
-@media (max-width: $scr-width-sm) {
+@media (max-width: var(--scr-width-sm)) {
     #question-form {
         margin-bottom: 3rem;
     }
@@ -934,14 +951,14 @@ label {
 }
 
 .table-active {
-    background-color: rgba($accent, 0.2) !important;
+    background-color: color-mix(in srgb, var(--accent) 20%, transparent) !important;
 }
 
 @import "stats.scss";
 .stats-dot {
     width: 8px;
     height: 8px;
-    background-color: $accent;
+    background-color: var(--accent);
     border-radius: 50%;
     display: inline-block;
 }
@@ -952,8 +969,8 @@ label {
     flex-wrap: wrap;
     gap: 0.5rem;
     .tag {
-        background-color: $accent;
-        color: $black;
+        background-color: var(--accent);
+        color: var(--black);
         font-size: 1.1rem;
         font-weight: 500;
         padding: 0.4rem 0.75rem;
@@ -961,7 +978,7 @@ label {
         white-space: nowrap;
         border: none;
         &:hover {
-            background-color: lighten($accent, 10%);
+            background-color: var(--accent-hover);
             transform: translateY(-1px);
             transition: all 0.2s ease;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -970,7 +987,7 @@ label {
 }
 
 // Mobile responsive tags
-@media (max-width: $scr-width-sm) {
+@media (max-width: var(--scr-width-sm)) {
     .episode-tags {
         gap: 0.4rem;
         .tag {
@@ -987,7 +1004,7 @@ label {
                     transform: scale(0.75);
                     &:hover {
                         transform: translateY(-1px) scale(0.8);
-                        box-shadow: 0 3px 10px rgba($accent, 0.3);
+                        box-shadow: 0 3px 10px color-mix(in srgb, var(--accent) 30%, transparent);
                     }
                 }
                 &.tag-sm {
@@ -996,7 +1013,7 @@ label {
                     transform: scale(0.85);
                     &:hover {
                         transform: translateY(-1px) scale(0.9);
-                        box-shadow: 0 3px 10px rgba($accent, 0.3);
+                        box-shadow: 0 3px 10px color-mix(in srgb, var(--accent) 30%, transparent);
                     }
                 }
                 &.tag-md {
@@ -1005,7 +1022,7 @@ label {
                     transform: scale(0.9);
                     &:hover {
                         transform: translateY(-1px) scale(0.95);
-                        box-shadow: 0 3px 10px rgba($accent, 0.3);
+                        box-shadow: 0 3px 10px color-mix(in srgb, var(--accent) 30%, transparent);
                     }
                 }
                 &.tag-lg {
@@ -1015,7 +1032,7 @@ label {
                     font-weight: 600;
                     &:hover {
                         transform: translateY(-1px) scale(1.05);
-                        box-shadow: 0 3px 10px rgba($accent, 0.3);
+                        box-shadow: 0 3px 10px color-mix(in srgb, var(--accent) 30%, transparent);
                     }
                 }
                 &.tag-xl {
@@ -1025,7 +1042,7 @@ label {
                     font-weight: 700;
                     &:hover {
                         transform: translateY(-1px) scale(1.15);
-                        box-shadow: 0 4px 12px rgba($accent, 0.4);
+                        box-shadow: 0 4px 12px color-mix(in srgb, var(--accent) 40%, transparent);
                     }
                 }
             }
@@ -1088,7 +1105,7 @@ label {
             }
             &:hover {
                 transform: translateY(-2px);
-                box-shadow: 0 4px 15px rgba($accent, 0.3);
+                box-shadow: 0 4px 15px color-mix(in srgb, var(--accent) 30%, transparent);
             }
         }
     }
@@ -1102,7 +1119,7 @@ label {
 .episodes-by-tag {
     .episode-item {
         background: linear-gradient(135deg, rgba(white, 0.02), rgba(white, 0.01));
-        border-left: 4px solid $accent;
+        border-left: 4px solid var(--accent);
         border-radius: 8px;
         transition: all 0.3s ease;
         padding: 1.5rem;
@@ -1121,18 +1138,18 @@ label {
             left: 0;
             right: 0;
             height: 1px;
-            background: linear-gradient(90deg, $accent, transparent);
+            background: linear-gradient(90deg, var(--accent), transparent);
             opacity: 0.5;
         }
         &:hover {
             background: linear-gradient(135deg, rgba(white, 0.05), rgba(white, 0.03));
             transform: translateX(8px) translateY(-2px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-            border-left-color: lighten($accent, 10%);
+            border-left-color: var(--accent-hover);
             text-decoration: none !important;
             color: inherit;
             .episode-title {
-                color: $accent;
+                color: var(--accent);
             }
             .episode-artwork img {
                 transform: scale(1.05);
