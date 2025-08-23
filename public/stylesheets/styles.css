@@ -1128,7 +1128,9 @@ label {
   margin-bottom: 1.5rem;
   position: relative;
   overflow: hidden;
-  display: block;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
   text-decoration: none !important;
   color: inherit;
 }
@@ -1153,8 +1155,26 @@ label {
 .episodes-by-tag .episode-item:hover .episode-title {
   color: #41caff;
 }
+.episodes-by-tag .episode-item:hover .episode-artwork img {
+  transform: scale(1.05);
+}
+.episodes-by-tag .episode-item .episode-artwork {
+  flex-shrink: 0;
+  width: 120px;
+  height: 120px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.episodes-by-tag .episode-item .episode-artwork img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
 .episodes-by-tag .episode-item .episode-meta {
   position: relative;
+  flex: 1;
+  min-width: 0;
 }
 .episodes-by-tag .episode-item .episode-title {
   margin-bottom: 0.8rem;

@@ -20,6 +20,8 @@ block content
             .episodes-by-tag
               each episode in episodes
                 a.episode-item.mb-4.p-3(href=`/episodes/${episode.episodeNum}`)
+                  .episode-artwork
+                    img(src=episode.shareImg || '/images/og-techlife-artwork-1200.jpg' alt=`Episode ${episode.episodeNum} artwork`)
                   .episode-meta
                     h3.episode-title №#{episode.episodeNum} #{episode.title}
                     

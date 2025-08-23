@@ -1109,7 +1109,9 @@ label {
         margin-bottom: 1.5rem;
         position: relative;
         overflow: hidden;
-        display: block;
+        display: flex;
+        align-items: flex-start;
+        gap: 1.5rem;
         text-decoration: none !important;
         color: inherit;
         &::before {
@@ -1132,9 +1134,27 @@ label {
             .episode-title {
                 color: $accent;
             }
+            .episode-artwork img {
+                transform: scale(1.05);
+            }
+        }
+        .episode-artwork {
+            flex-shrink: 0;
+            width: 120px;
+            height: 120px;
+            border-radius: 6px;
+            overflow: hidden;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+            }
         }
         .episode-meta {
             position: relative;
+            flex: 1;
+            min-width: 0; // Allows text to truncate properly
         }
         .episode-title {
             margin-bottom: 0.8rem;
