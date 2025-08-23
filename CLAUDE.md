@@ -106,3 +106,33 @@ Defined in `scss/_variables.scss` - **ALWAYS use these variables, never hardcode
 - Jest test framework configured
 - Test files in `tests/` directory
 - Coverage excludes node_modules
+
+## Commit Message Requirement
+
+**Every coding solution must be followed by a brief commit message.**
+
+When providing code changes, fixes, or implementations, always conclude with a concise commit message that:
+
+- Summarizes the changes made
+- Uses conventional commit format when applicable (feat:, fix:, chore:, etc.)
+- Is ready to use with `git commit -m "message"`
+- Focuses on the "what" and "why" of the changes
+
+If you detect that there was a follow-up question or a request to improve the previously provided requirement, amend the commit with updates.
+
+### Examples:
+
+```
+fix: resolve MCP connection issues in Vercel deployment
+
+- Improve code that controls MCP
+- Fix incorrect file references
+```
+
+```
+feat: add task archiving functionality to dashboard
+```
+
+```
+chore: обновит зависимости и исправить ошибки в TypeScript
+```
