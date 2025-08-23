@@ -5,7 +5,7 @@ const router = express.Router();
 const path = require("path");
 const fs = require('fs-extra');
 const Project = require("../scripts/app.functions");
-const { processEpisodes } = require('../scripts/utils/episode-processor');
+const { processAndEnrichEpisodes, getAllPodcastTags, getEpisodesByTag } = require('../services/episode-service');
 
 const statsRouter = require('./stats');
 const adminRouter = require('./admin');
@@ -25,49 +25,13 @@ let episodes = [];
 // Update current year
 projectInfo.currentYear = new Date().getFullYear();
 
-// Function to load episode analysis data with tags
-function loadEpisodeAnalysis() {
-    try {
-        const analysisPath = path.join(__dirname, "..", "data", "podcast-analysis-progress.json");
-        if (fs.existsSync(analysisPath)) {
-            const analysisData = JSON.parse(fs.readFileSync(analysisPath, 'utf8'));
-            return analysisData.episodeAnalyses || [];
-        }
-    } catch (error) {
-        console.warn('Could not load episode analysis data:', error.message);
-    }
-    return [];
-}
-
-// Function to merge episode data with analysis tags
-function mergeEpisodesWithTags(episodes, analyses) {
-    const analysisMap = analyses.reduce((map, analysis) => {
-        map[analysis.episodeNumber] = analysis;
-        return map;
-    }, {});
-
-    return episodes.map(episode => {
-        const episodeNum = parseInt(episode.episodeNum);
-        const analysis = analysisMap[episodeNum];
-
-        return {
-            ...episode,
-            tags: analysis ? analysis.tags : [],
-            summary: analysis ? analysis.summary : null
-        };
-    });
-}
 
 async function initializeProject() {
     await project.init();
     project.sortBy({ property: "date", asc: false });
 
     podcast = project.podcastModule.json.rss;
-    const processedEpisodes = processEpisodes(podcast.channel.item);
-
-    // Load episode analysis and merge with episodes
-    const episodeAnalyses = loadEpisodeAnalysis();
-    episodes = mergeEpisodesWithTags(processedEpisodes, episodeAnalyses);
+    episodes = processAndEnrichEpisodes(podcast);
 
     // Make episodes available to the entire app
     router.use((req, res, next) => {
@@ -174,32 +138,9 @@ router.get("/episodes/:id", (req, res, next) => {
     }
 });
 
-// Function to get all unique tags from episodes with counts
-function getAllPodcastTags() {
-    const tagCounts = {};
-    episodes.forEach(episode => {
-        if (episode.tags && episode.tags.length > 0) {
-            episode.tags.forEach(tag => {
-                tagCounts[tag] = (tagCounts[tag] || 0) + 1;
-            });
-        }
-    });
-
-    // Convert to array of objects with tag name and count, sorted alphabetically
-    return Object.entries(tagCounts)
-        .map(([tag, count]) => ({ name: tag, count }))
-        .sort((a, b) => a.name.localeCompare(b.name));
-}
-
-// Function to get episodes by tag
-function getEpisodesByTag(tagName) {
-    return episodes.filter(episode =>
-        episode.tags && episode.tags.includes(tagName)
-    ).sort((a, b) => parseInt(b.episodeNum) - parseInt(a.episodeNum)); // Sort by episode number, newest first
-}
 
 router.get("/tags", (req, res) => {
-    const podcastTags = getAllPodcastTags();
+    const podcastTags = getAllPodcastTags(episodes);
 
     res.render("podcast-tags", {
         podcastTags,
@@ -215,7 +156,7 @@ router.get("/tags", (req, res) => {
 
 router.get("/tags/:tag", async(req, res) => {
     const { tag } = req.params;
-    const taggedEpisodes = getEpisodesByTag(tag);
+    const taggedEpisodes = getEpisodesByTag(episodes, tag);
 
     if (taggedEpisodes.length === 0) {
         return res.status(404).render("404");
