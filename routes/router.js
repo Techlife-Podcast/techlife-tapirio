@@ -1,4 +1,4 @@
-// routes/index.js
+// routes/router.js
 const cors = require("cors");
 const express = require("express");
 const router = express.Router();

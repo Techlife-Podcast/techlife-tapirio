@@ -9,7 +9,7 @@ const logger = require("morgan");
 // const sassMiddleware = require("sass-middleware"); // Removed - now using Vite for SCSS compilation
 const helmet = require("helmet");
 
-const indexRouter = require("./routes/index");
+const indexRouter = require("./routes/router");
 const usersRouter = require("./routes/users");
 
 // Cache busting for assets
