@@ -8,6 +8,8 @@ const Project = require("../scripts/app.functions");
 const { processEpisodes } = require('../scripts/utils/episode-processor');
 
 const statsRouter = require('./stats');
+const adminRouter = require('./admin');
+const { CATEGORY_NAMES } = require('../constants/categories');
 
 // Constants
 const BLOG_PATH = path.join(__dirname, "..", "content", "articles");
@@ -126,6 +128,11 @@ router.use('/stats', (req, res, next) => {
     res.locals.noIndex = true;
     next();
 }, statsRouter);
+
+router.use('/adminka', (req, res, next) => {
+    res.locals.noIndex = true;
+    next();
+}, adminRouter);
 
 router.get("/guests", (req, res) => {
     res.render("guests", {
@@ -268,23 +275,18 @@ router.get("/blog/:filename", async(req, res) => {
     });
 });
 
-// Questions submission page with alternative routes
-const questionPageHandler = (req, res) => {
+// Question page handler
+function questionPageHandler(req, res) {
     res.render("voprosy", {
         projectInfo,
         path: req.path,
         pageTitle: "Задать вопрос",
         pageDescription: "Задайте свой вопрос ведущим подкаста Технологии и жизнь",
     });
-};
+}
 
-router.get("/voprosy", questionPageHandler);
-router.get("/ask", questionPageHandler);
-router.get("/contact", questionPageHandler);
-router.get("/question", questionPageHandler);
-
-// Handle question submissions for all question routes
-const questionSubmissionHandler = async(req, res) => {
+// Question submission handler
+async function questionSubmissionHandler(req, res) {
     try {
         const { name, email, question, category, privacy } = req.body;
 
@@ -310,7 +312,6 @@ const questionSubmissionHandler = async(req, res) => {
 
         // Save to file
         const fs = require('fs-extra');
-        const path = require('path');
         const questionsFile = path.join(__dirname, '..', 'content', 'listener-questions.json');
 
         // Ensure directory exists
@@ -338,77 +339,19 @@ const questionSubmissionHandler = async(req, res) => {
         console.error('Error saving question:', error);
         res.status(500).json({ error: "Произошла ошибка при сохранении вопроса" });
     }
-};
+}
 
+// Question page routes
+router.get("/voprosy", questionPageHandler);
+router.get("/ask", questionPageHandler);
+router.get("/contact", questionPageHandler);
+router.get("/question", questionPageHandler);
+
+// Question submission routes
 router.post("/voprosy", questionSubmissionHandler);
 router.post("/ask", questionSubmissionHandler);
 router.post("/contact", questionSubmissionHandler);
 router.post("/question", questionSubmissionHandler);
 
-// Admin page for viewing question submissions
-router.get("/adminka/voprosy", async(req, res) => {
-    try {
-        const fs = require('fs-extra');
-        const path = require('path');
-        const questionsFile = path.join(__dirname, '..', 'content', 'listener-questions.json');
-
-        let questions = [];
-        try {
-            const data = await fs.readFile(questionsFile, 'utf8');
-            questions = JSON.parse(data);
-        } catch (err) {
-            // File doesn't exist or is empty
-            questions = [];
-        }
-
-        // Process questions for display
-        const processedQuestions = questions.map(q => ({
-            ...q,
-            formattedDate: new Date(q.timestamp).toLocaleDateString('ru-RU', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric'
-            }),
-            formattedTime: new Date(q.timestamp).toLocaleTimeString('ru-RU', {
-                hour: '2-digit',
-                minute: '2-digit'
-            }),
-            questionPreview: q.question.length > 100 ? q.question.substring(0, 100) : q.question
-        }));
-
-        // Sort by timestamp (newest first)
-        processedQuestions.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-
-        // Helper function for category names
-        const getCategoryName = (category) => {
-            const categories = {
-                'technology': 'Технологии',
-                'philosophy': 'Философия',
-                'travel': 'Путешествия',
-                'security': 'ИИ',
-                'lifestyle': 'Образ жизни',
-                'future': 'Будущее',
-                'other': 'Другое'
-            };
-            return categories[category] || 'Другое';
-        };
-
-        res.render("voprosy-admin", {
-            questions: processedQuestions,
-            getCategoryName,
-            projectInfo,
-            path: req.path,
-            pageTitle: "Админ панель - Вопросы слушателей",
-            noIndex: true // Don't index admin pages
-        });
-
-    } catch (error) {
-        console.error('Error loading questions:', error);
-        res.status(500).render('error', {
-            message: 'Ошибка загрузки вопросов',
-            error: req.app.get('env') === 'development' ? error : {}
-        });
-    }
-});
 
 module.exports = router;
