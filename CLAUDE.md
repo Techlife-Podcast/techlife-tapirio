@@ -136,3 +136,9 @@ feat: add task archiving functionality to dashboard
 ```
 chore: обновит зависимости и исправить ошибки в TypeScript
 ```
+
+## Updates to README.md
+
+When a new technology is implemented, add a short note about its purpose to README.md in the original language of the doc.
+
+The intended audience is project team contributors.
