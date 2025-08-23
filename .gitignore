@@ -31,4 +31,10 @@ listener-questions.json
 # Asset manifest (generated during build)
 public/asset-manifest.json
 
+# Vite build output
+dist/
+
+# Vite generated legacy assets
+public/assets/
+
 .vscode/

@@ -45,11 +45,8 @@ jobs:
             npm install --no-bin-links
           fi
           
-          # Install Sass locally
-          npm install sass --save-dev
-          
-          # Run Sass build
-          npx sass scss/styles.scss:public/stylesheets/styles.css --style compressed
+          # Build with Vite (includes SCSS compilation)
+          npm run sass-build
           
           # Verify build
           if [ ! -f public/stylesheets/styles.css ]; then

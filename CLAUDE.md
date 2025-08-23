@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Production start**: `npm start` - Starts the main application server
 - **Admin panel**: `npm run admin` - Starts the admin interface
 - **Tests**: `npm test` - Runs Jest test suite
-- **Sass compilation**: `npm run sass-build` - Compiles SCSS to compressed CSS
+- **Vite SCSS compilation**: `npm run sass-build` - Compiles SCSS to compressed CSS with modern optimization
 
 ## Architecture Overview
 
@@ -18,7 +18,7 @@ This is a Node.js/Express podcast website for "Techlife Podcast" (Техноло
 - **Express.js** web framework with Pug templating
 - **Content Management**: Markdown articles processed from `content/articles/`
 - **Podcast Feed**: XML podcast feed parsing and processing
-- **SCSS/Sass** for styling with Bootstrap 4 integration
+- **Vite + SCSS** for modern styling with Bootstrap 4 integration
 - **Static Assets**: Served from `public/` directory
 
 ### Key Modules
@@ -96,7 +96,7 @@ Defined in `scss/_variables.scss` - **ALWAYS use these variables, never hardcode
 - Bootstrap conflicts resolved through proper SCSS imports
 
 ### Development Rules
-1. **Never use inline styles** - all styling goes through SCSS compilation
+1. **Never use inline styles** - all styling goes through Vite SCSS compilation
 2. **No font-size overrides** - use the defined typography scale
 3. **Color consistency** - only use defined SCSS variables
 4. **Large text preference** - default to larger sizes for better UX

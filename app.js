@@ -6,7 +6,7 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-const sassMiddleware = require("sass-middleware");
+// const sassMiddleware = require("sass-middleware"); // Removed - now using Vite for SCSS compilation
 const helmet = require("helmet");
 
 const indexRouter = require("./routes/index");
@@ -52,15 +52,16 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(
-    sassMiddleware({
-        src: path.join(__dirname, "scss"),
-        dest: path.join(__dirname, "public/stylesheets"),
-        debug: true,
-        outputStyle: "compressed",
-        prefix: "/stylesheets",
-    })
-);
+// Sass middleware removed - now using Vite for SCSS compilation
+// app.use(
+//     sassMiddleware({
+//         src: path.join(__dirname, "scss"),
+//         dest: path.join(__dirname, "public/stylesheets"),
+//         debug: true,
+//         outputStyle: "compressed",
+//         prefix: "/stylesheets",
+//     })
+// );
 app.use(express.static(path.join(__dirname, "public")));
 
 // Initialize project data
