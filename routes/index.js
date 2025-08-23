@@ -124,12 +124,12 @@ router.get("/resources", (req, res) => {
     });
 });
 
-router.use('/stats', (req, res, next) => {
+router.use('/stats', (_req, res, next) => {
     res.locals.noIndex = true;
     next();
 }, statsRouter);
 
-router.use('/adminka', (req, res, next) => {
+router.use('/adminka', (_req, res, next) => {
     res.locals.noIndex = true;
     next();
 }, adminRouter);
