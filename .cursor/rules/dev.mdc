@@ -1,0 +1,10 @@
+---
+description: Development Details
+globs:
+alwaysApply: true
+---
+
+## Update README.md
+
+When a new technology is implemented, add a short note about its purpose to README.md in the original language of the doc.
+
