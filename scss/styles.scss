@@ -1109,6 +1109,9 @@ label {
         margin-bottom: 1.5rem;
         position: relative;
         overflow: hidden;
+        display: block;
+        text-decoration: none !important;
+        color: inherit;
         &::before {
             content: '';
             position: absolute;
@@ -1124,24 +1127,23 @@ label {
             transform: translateX(8px) translateY(-2px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
             border-left-color: lighten($accent, 10%);
+            text-decoration: none !important;
+            color: inherit;
+            .episode-title {
+                color: $accent;
+            }
         }
         .episode-meta {
             position: relative;
         }
         .episode-title {
             margin-bottom: 0.8rem;
-            a {
-                color: white;
-                text-decoration: none !important;
-                font-size: 1.25rem;
-                font-weight: 500;
-                line-height: 1.3;
-                transition: color 0.2s ease;
-                &:hover {
-                    color: $accent;
-                    text-decoration: none !important;
-                }
-            }
+            color: white;
+            text-decoration: none !important;
+            font-size: 1.5rem;
+            font-weight: 500;
+            line-height: 1.3;
+            transition: color 0.2s ease;
         }
         .episode-date {
             font-size: 0.85rem;
@@ -1153,17 +1155,9 @@ label {
         }
         .episode-subtitle {
             color: rgba(white, 0.8);
-            font-size: 0.95rem;
+            font-size: 1.2rem;
             line-height: 1.4;
             margin-bottom: 1rem;
-            font-style: italic;
-        }
-        .episode-other-tags {
-            font-size: 0.85rem;
-            color: rgba(white, 0.7);
-            margin-top: 1rem;
-            padding-top: 0.75rem;
-            border-top: 1px solid rgba(white, 0.1);
         }
     }
 }

@@ -19,10 +19,9 @@ block content
           if episodes && episodes.length > 0
             .episodes-by-tag
               each episode in episodes
-                .episode-item.mb-4.p-3
+                a.episode-item.mb-4.p-3(href=`/episodes/${episode.episodeNum}`)
                   .episode-meta
-                    h3.episode-title
-                      a(href=`/episodes/${episode.episodeNum}`) №#{episode.episodeNum} #{episode.title}
+                    h3.episode-title №#{episode.episodeNum} #{episode.title}
                     
                     if episode.pubDateConverted
                       p.episode-date.text-muted.mb-2 #{episode.pubDateConverted}
@@ -30,12 +29,6 @@ block content
                     if episode['itunes:subtitle']
                       p.episode-subtitle.mb-2 #{episode['itunes:subtitle']}
                     
-                    if episode.tags && episode.tags.length > 1
-                      .episode-other-tags.episode-tags
-                        each otherTag, index in episode.tags
-                          if otherTag !== tag
-                            a.tag-link(href=`/tags/${encodeURIComponent(otherTag)}`)
-                              span.tag # #{otherTag}
           else
             .no-episodes.text-center.py-5
               p.lead Эпизодов с этим тегом не найдено
