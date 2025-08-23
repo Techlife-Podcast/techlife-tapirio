@@ -3,7 +3,7 @@ const cors = require("cors");
 const express = require("express");
 const router = express.Router();
 const path = require("path");
-const fs = require('fs');
+const fs = require('fs-extra');
 const Project = require("../scripts/app.functions");
 const { processEpisodes } = require('../scripts/utils/episode-processor');
 
@@ -311,7 +311,6 @@ async function questionSubmissionHandler(req, res) {
         };
 
         // Save to file
-        const fs = require('fs-extra');
         const questionsFile = path.join(__dirname, '..', 'content', 'listener-questions.json');
 
         // Ensure directory exists
