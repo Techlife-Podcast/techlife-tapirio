@@ -19,7 +19,7 @@ block content
                 .episode-tags.mt-2.mb-3
                   each tag in item.tags
                     a.tag-link(href=`/tags/${encodeURIComponent(tag)}`)
-                      span.tag #{tag}
+                      span.tag # #{tag}
               .selected-box
 
   include partials/footer

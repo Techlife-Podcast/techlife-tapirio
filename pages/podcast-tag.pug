@@ -35,7 +35,7 @@ block content
                         each otherTag, index in episode.tags
                           if otherTag !== tag
                             a.tag-link(href=`/tags/${encodeURIComponent(otherTag)}`)
-                              span.tag #{otherTag}
+                              span.tag # #{otherTag}
           else
             .no-episodes.text-center.py-5
               p.lead Эпизодов с этим тегом не найдено

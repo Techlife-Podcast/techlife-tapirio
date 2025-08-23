@@ -119,7 +119,7 @@
             let tagsHtml = '';
             if (episode.tags && episode.tags.length > 0) {
                 const tagElements = episode.tags.map(tag =>
-                    `<a class="tag-link" href="/tags/${encodeURIComponent(tag)}"><span class="tag">${tag}</span></a>`
+                    `<a class="tag-link" href="/tags/${encodeURIComponent(tag)}"><span class="tag"># ${tag}</span></a>`
                 ).join('');
                 tagsHtml = `<div class="episode-tags my-4">${tagElements}</div>`;
             }

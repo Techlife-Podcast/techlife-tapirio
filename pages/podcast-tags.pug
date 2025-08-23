@@ -27,7 +27,7 @@ block content
             each tagData in sortedTags
               .tag-item
                 a.tag-link(href=`/tags/${encodeURIComponent(tagData.name)}`)
-                  span.tag(class=getTagSize(tagData.count)) #{tagData.name} (#{tagData.count})
+                  span.tag(class=getTagSize(tagData.count)) # #{tagData.name} (#{tagData.count})
           
           .mt-4
             p.text-muted
