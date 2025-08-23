@@ -28,7 +28,9 @@ This is a Node.js/Express podcast website for "Techlife Podcast" (Техноло
 - `scripts/utils/episode-processor.js` - Episode data processing utilities
 
 ### Routes Structure
-- `routes/index.js` - Main website routes (home, episodes, blog, etc.)
+- `routes/router.js` - Main website routes (home, episodes, blog, etc.)
+- `routes/questions.js` - Question submission functionality
+- `routes/admin.js` - Administrative interface routes
 - `routes/stats.js` - Statistics and analytics endpoints
 - `routes/users.js` - User-related routes
 
@@ -44,7 +46,7 @@ This is a Node.js/Express podcast website for "Techlife Podcast" (Техноло
 
 ## Development Notes
 
-- The application uses dual initialization in both `app.js` and `routes/index.js` for data loading
+- The application uses dual initialization in both `app.js` and `routes/router.js` for data loading
 - Environment variables loaded from `.server` file
 - Default development port is 4002 (configurable via PORT env var)
 - Local development URL: http://localhost:3501 (as mentioned in README)
