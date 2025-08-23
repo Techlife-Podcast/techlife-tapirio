@@ -34,7 +34,7 @@ jobs:
             # Remove existing CSS to force fresh compilation
             rm -f public/stylesheets/styles.css
             rm -f public/stylesheets/styles.css.map
-            npm run sass-build
+            npm run build-prod
             echo "📄 CSS file after build:"
             ls -la public/stylesheets/styles.css
             echo "🔨 Building assets with cache busting..."

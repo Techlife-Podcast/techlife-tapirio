@@ -8,6 +8,7 @@
         "test": "jest",
         "sass": "concurrently \"vite build --watch\" \"node scripts/vite-watch-helper.js\"",
         "sass-build": "vite build && node scripts/vite-postbuild.js",
+        "build-prod": "NODE_ENV=production vite build && node scripts/vite-postbuild.js",
         "devstart": "nodemon ./bin/www-techlife",
         "serverstart": "DEBUG=tapirio:* npm run devstart",
         "dev": "concurrently \"npm run devstart\" \"npm run sass\"",
@@ -57,6 +58,7 @@
         "postcss-nesting": "^13.0.2",
         "postcss-preset-env": "^10.3.0",
         "supertest": "^7.1.4",
+        "terser": "^5.43.1",
         "ts-node": "^10.9.2",
         "typescript": "^5.9.2",
         "vite": "^7.1.3"

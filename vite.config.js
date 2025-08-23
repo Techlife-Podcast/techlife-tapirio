@@ -24,6 +24,21 @@ export default defineConfig({
         // Empty the dist directory before building
         emptyOutDir: true,
 
+        // Enable minification
+        minify: 'terser',
+        
+        // Configure terser options for better compression
+        terserOptions: {
+            compress: {
+                drop_console: true,
+                drop_debugger: true,
+                pure_funcs: ['console.log', 'console.info', 'console.debug', 'console.warn']
+            }
+        },
+
+        // Enable CSS code splitting for better caching
+        cssCodeSplit: true,
+
         rollupOptions: {
             input: {
                 // Main styles entry point
@@ -38,7 +53,15 @@ export default defineConfig({
                         return `${assetInfo.name}`;
                     }
                     return 'assets/[name]-[hash][extname]';
-                }
+                },
+                // Enable tree shaking for better optimization
+                manualChunks: undefined
+            },
+            // Tree shaking configuration
+            treeshake: {
+                moduleSideEffects: false,
+                propertyReadSideEffects: false,
+                unknownGlobalSideEffects: false
             }
         }
     },
@@ -57,7 +80,9 @@ export default defineConfig({
                     resolve(__dirname, 'scss/bootstrap')
                 ]
             }
-        }
+        },
+        // Enable CSS minification
+        devSourcemap: false
     },
 
     // Development server configuration
