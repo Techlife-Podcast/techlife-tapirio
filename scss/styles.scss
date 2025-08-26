@@ -1,9 +1,10 @@
-@import url("https://unpkg.com/css.gg/icons/all.css");
+@use "_variables.scss" as variables;
+@use "_mixins.scss" as mixins;
+@use "stats.scss";
 @import "bootstrap/_functions.scss";
 @import "bootstrap/_variables.scss";
 @import "bootstrap/_breakpoints.scss";
-@import "_variables.scss";
-@import "_mixins.scss";
+@import url("https://unpkg.com/css.gg/icons/all.css");
 
 /* Note: CSS Custom Properties are now centralized in _variables.scss */
 
@@ -954,7 +955,6 @@ label {
     background-color: color-mix(in srgb, var(--accent) 20%, transparent) !important;
 }
 
-@import "stats.scss";
 .stats-dot {
     width: 8px;
     height: 8px;

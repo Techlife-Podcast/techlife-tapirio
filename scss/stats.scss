@@ -1,4 +1,4 @@
-@import "_variables.scss";
+@use "_variables.scss" as variables;
 .stats-overview {}
 
 .stat-box {

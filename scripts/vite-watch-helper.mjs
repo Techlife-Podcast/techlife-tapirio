@@ -1,9 +1,12 @@
 #!/usr/bin/env node
 
 // scripts/vite-watch-helper.js - Watch for Vite build changes and copy CSS files
-const fs = require('fs-extra');
-const path = require('path');
-const chokidar = require('chokidar');
+import fs from 'fs-extra';
+import path from 'path';
+import chokidar from 'chokidar';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const distDir = path.join(__dirname, '..', 'dist');
 const publicDir = path.join(__dirname, '..', 'public');

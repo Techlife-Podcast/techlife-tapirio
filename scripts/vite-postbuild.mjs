@@ -1,8 +1,11 @@
 #!/usr/bin/env node
 
 // scripts/vite-postbuild.js
-const fs = require('fs-extra');
-const path = require('path');
+import fs from 'fs-extra';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 console.log('📦 Post-processing Vite build files...\n');
 

@@ -1,8 +1,11 @@
 #!/usr/bin/env node
 
 // Build script for generating asset manifest with cache busting
-const CacheBuster = require('./cache-buster');
-const path = require('path');
+import CacheBuster from './cache-buster.mjs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 console.log('🚀 Building assets with cache busting...\n');
 
