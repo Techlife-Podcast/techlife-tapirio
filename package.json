@@ -11,7 +11,7 @@
         "build-prod": "NODE_ENV=production vite build && node scripts/vite-postbuild.mjs",
         "devstart": "nodemon ./bin/www-techlife",
         "serverstart": "DEBUG=tapirio:* npm run devstart",
-        "dev": "concurrently \"npm run devstart\" \"npm run sass\"",
+        "dev": "npm run analyze-podcast analyze && concurrently \"npm run devstart\" \"npm run sass\"",
         "build": "npm run sass-build && node scripts/build-assets.mjs",
         "cache-bust": "node scripts/build-assets.mjs",
         "analyze-podcast": "npx ts-node scripts/utils/podcast-analyzer/podcast-analyzer.ts",

@@ -74,7 +74,7 @@ class PodcastAnalyzer {
   private openai: OpenAI;
   private commonCategories: string[] = [];
   private config: LLMConfig;
-  private progressFile = path.join(__dirname, '../../../data/podcast-analysis-progress.json');
+  private progressFile = path.join(__dirname, '../../../data/podcast-analysis-data.json');
   private temperatureWarningShown = false;
 
   constructor(apiKey: string, configPath?: string) {

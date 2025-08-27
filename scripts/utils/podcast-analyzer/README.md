@@ -125,7 +125,7 @@ npm run analyze-podcast
 ## Output
 
 The script creates:
-- `data/podcast-analysis-progress.json` - Complete analysis results and progress tracking
+- `data/podcast-analysis-data.json` - Complete analysis results and progress tracking
 
 ## Example Output
 

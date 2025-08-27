@@ -8,7 +8,7 @@ const { processEpisodes } = require('../scripts/utils/episode-processor');
  */
 function loadEpisodeAnalysis() {
     try {
-        const analysisPath = path.join(__dirname, "..", "data", "podcast-analysis-progress.json");
+        const analysisPath = path.join(__dirname, "..", "data", "podcast-analysis-data.json");
         if (fs.existsSync(analysisPath)) {
             const analysisData = JSON.parse(fs.readFileSync(analysisPath, 'utf8'));
             return analysisData.episodeAnalyses || [];
