@@ -2,17 +2,41 @@
   .col-sm-12.mt-2
     p.nav-back
       | &#8592; 
-      a(href='javascript:void(0)' onclick='goBack()') обратно
+      a(href='#' id='back-button') обратно
 
 script.
+  document.addEventListener('DOMContentLoaded', function() {
+    const backButton = document.getElementById('back-button');
+    if (backButton) {
+      backButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        goBack();
+      });
+    }
+  });
+
   function goBack() {
-    // Check if there's browser history and if the previous page is from our domain
-    if (window.history.length > 1 && document.referrer && 
-        (document.referrer.includes(window.location.hostname) || 
-         document.referrer.includes('techlifepodcast.com'))) {
-      window.history.back();
-    } else {
-      // If no history or previous page is not from our site (like browser default), go to home
+    // Always fallback to home page after trying history.back()
+    // This handles both cases: no history and failed history.back()
+    try {
+      if ('history' in window && window.history.length > 1 && document.referrer) {
+        // Try to go back if we have history and came from somewhere
+        const currentUrl = window.location.href;
+        window.history.back();
+        
+        // Always fallback to home after a short delay
+        setTimeout(() => {
+          if (window.location.href === currentUrl) {
+            // History.back() didn't work or didn't change URL
+            window.location.href = '/';
+          }
+        }, 200);
+      } else {
+        // No meaningful history (direct navigation) - go to home
+        window.location.href = '/';
+      }
+    } catch (error) {
+      // Any error - go to home
       window.location.href = '/';
     }
   }
