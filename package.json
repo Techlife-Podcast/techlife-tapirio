@@ -8,7 +8,7 @@
         "test": "jest",
         "sass": "concurrently \"vite build --watch\" \"node scripts/vite-watch-helper.mjs\"",
         "sass-build": "vite build && node scripts/vite-postbuild.mjs",
-        "build-prod": "NODE_ENV=production vite build && node scripts/vite-postbuild.js",
+        "build-prod": "NODE_ENV=production vite build && node scripts/vite-postbuild.mjs",
         "devstart": "nodemon ./bin/www-techlife",
         "serverstart": "DEBUG=tapirio:* npm run devstart",
         "dev": "concurrently \"npm run devstart\" \"npm run sass\"",
