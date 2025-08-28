@@ -37,4 +37,9 @@ dist/
 # Vite generated legacy assets
 public/assets/
 
+# Test results and screenshots (keep history locally, don't commit)
+test-results/
+playwright-test-results/
+playwright-report/
+
 .vscode/
