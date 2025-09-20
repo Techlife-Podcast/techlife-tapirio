@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 
-// scripts/vite-watch-helper.js - Watch for Vite build changes and copy CSS files
+// scripts/vite-watch-helper.mjs - Watch for Vite build changes and copy CSS files
 import fs from 'fs-extra';
 import path from 'path';
 import chokidar from 'chokidar';
 import { fileURLToPath } from 'url';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const __dirname = path.dirname(fileURLToPath(
+    import.meta.url));
 
 const distDir = path.join(__dirname, '..', 'dist');
 const publicDir = path.join(__dirname, '..', 'public');
@@ -28,8 +29,19 @@ async function copyStylesheets() {
             const destPath = path.join(stylesheetsDir, file);
 
             if (await fs.pathExists(srcPath)) {
-                await fs.copy(srcPath, destPath);
-                console.log(`✅ Copied ${file} to public/stylesheets/`);
+                try {
+                    await fs.copy(srcPath, destPath, { overwrite: true, errorOnExist: false });
+                    console.log(`✅ Copied ${file} to public/stylesheets/`);
+                } catch (error) {
+                    if (error && error.code === 'ENOENT' && error.syscall === 'unlink') {
+                        // Retry once after ensuring destination dir exists
+                        await fs.ensureDir(path.dirname(destPath));
+                        await fs.copy(srcPath, destPath, { overwrite: true, errorOnExist: false });
+                        console.log(`✅ Copied ${file} to public/stylesheets/ (after retry)`);
+                    } else {
+                        console.warn(`⚠️  Skipped copying ${file}: ${error.message}`);
+                    }
+                }
             }
         }
 

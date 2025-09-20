@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 
-// scripts/vite-postbuild.js
+// scripts/vite-postbuild.mjs
 import fs from 'fs-extra';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const __dirname = path.dirname(fileURLToPath(
+    import.meta.url));
 
 console.log('📦 Post-processing Vite build files...\n');
 
@@ -27,8 +28,18 @@ async function copyStylesheets() {
             const destPath = path.join(stylesheetsDir, file);
 
             if (await fs.pathExists(srcPath)) {
-                await fs.copy(srcPath, destPath);
-                console.log(`✅ Copied ${file} to public/stylesheets/`);
+                try {
+                    await fs.copy(srcPath, destPath, { overwrite: true, errorOnExist: false });
+                    console.log(`✅ Copied ${file} to public/stylesheets/`);
+                } catch (error) {
+                    if (error && error.code === 'ENOENT' && error.syscall === 'unlink') {
+                        await fs.ensureDir(path.dirname(destPath));
+                        await fs.copy(srcPath, destPath, { overwrite: true, errorOnExist: false });
+                        console.log(`✅ Copied ${file} to public/stylesheets/ (after retry)`);
+                    } else {
+                        console.warn(`⚠️  Skipped copying ${file}: ${error.message}`);
+                    }
+                }
             } else {
                 console.warn(`⚠️  ${file} not found in dist directory`);
             }
