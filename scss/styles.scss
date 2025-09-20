@@ -1,10 +1,11 @@
+// scss/styles.scss
 @import url("https://unpkg.com/css.gg/icons/all.css");
-@import "bootstrap/_functions.scss";
-@import "bootstrap/_variables.scss";
-@import "bootstrap/_breakpoints.scss";
-@import "_variables.scss";
-@import "_mixins.scss";
-@import "stats.scss";
+@use "bootstrap/functions" as *;
+@use "bootstrap/variables" as *;
+@use "bootstrap/breakpoints" as *;
+@use "_variables" as *;
+@use "_mixins" as *;
+@use "stats" as *;
 
 /* Note: CSS Custom Properties are now centralized in _variables.scss */
 

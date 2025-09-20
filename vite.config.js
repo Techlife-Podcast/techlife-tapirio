@@ -3,6 +3,11 @@ import { defineConfig } from 'vite';
 import legacy from '@vitejs/plugin-legacy';
 import { resolve } from 'path';
 
+// Silence Sass deprecation warnings (import/global-builtin/color-functions)
+process.env.SASS_SILENCE_DEPRECATIONS = process.env.SASS_SILENCE_DEPRECATIONS ?
+    process.env.SASS_SILENCE_DEPRECATIONS :
+    'import,global-builtin,color-functions';
+
 export default defineConfig({
     plugins: [
         legacy({
@@ -26,7 +31,7 @@ export default defineConfig({
 
         // Enable minification
         minify: 'terser',
-        
+
         // Configure terser options for better compression
         terserOptions: {
             compress: {
@@ -74,6 +79,9 @@ export default defineConfig({
             scss: {
                 // Enable modern sass API
                 api: 'modern-compiler',
+                // Suppress deprecation noise during transition period
+                quietDeps: true,
+                silenceDeprecations: ['import', 'global-builtin', 'color-functions'],
                 // Load paths for @import resolution
                 loadPaths: [
                     resolve(__dirname, 'scss'),
