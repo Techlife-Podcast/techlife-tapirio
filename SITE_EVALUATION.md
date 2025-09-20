@@ -148,8 +148,7 @@ Ran tool
 1. ✅ **Update Express to 4.19+** (security patches) 
 2. ✅ **Add helmet.js** (security headers in 5 minutes)
 3. ✅ **Replace moment.js with day.js** (smaller bundle size)
-4. **Add image optimization** (WebP conversion)
-5. ✅ **Implement CSS custom properties** (better theming - fully migrated)
+4. ✅ **Implement CSS custom properties** (better theming - fully migrated)
 
 ## TypeScript Migration Plan
 
