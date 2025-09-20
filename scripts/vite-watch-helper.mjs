@@ -57,7 +57,7 @@ const watcher = chokidar.watch([
 ], {
     ignored: /^\./,
     persistent: true,
-    ignoreInitial: false
+    ignoreInitial: true
 });
 
 watcher
