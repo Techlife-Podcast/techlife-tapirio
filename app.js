@@ -52,16 +52,7 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-// Sass middleware removed - now using Vite for SCSS compilation
-// app.use(
-//     sassMiddleware({
-//         src: path.join(__dirname, "scss"),
-//         dest: path.join(__dirname, "public/stylesheets"),
-//         debug: true,
-//         outputStyle: "compressed",
-//         prefix: "/stylesheets",
-//     })
-// );
+
 // Configure static file serving with explicit MIME types
 app.use(express.static(path.join(__dirname, "public"), {
     setHeaders: (res, path) => {
