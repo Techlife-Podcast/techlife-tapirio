@@ -62,7 +62,14 @@ app.use(cookieParser());
 //         prefix: "/stylesheets",
 //     })
 // );
-app.use(express.static(path.join(__dirname, "public")));
+// Configure static file serving with explicit MIME types
+app.use(express.static(path.join(__dirname, "public"), {
+    setHeaders: (res, path) => {
+        if (path.endsWith('.css')) {
+            res.setHeader('Content-Type', 'text/css');
+        }
+    }
+}));
 
 // Initialize project data
 const Project = require("./scripts/app.functions");
@@ -101,11 +108,20 @@ app.use("/users", usersRouter);
 
 // Custom 404 handler
 app.use(function(req, res, next) {
-    res.status(404).render('404', {
-        message: "Запрашиваемая страница не найдена",
-        title: "404 - Страница не найдена",
-        path: req.path || ''
-    });
+    // Check if the request is for a static asset (CSS, JS, images, etc.)
+    const isStaticAsset = /\.(css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot|mp3|mp4|webm|pdf)$/i.test(req.path);
+
+    if (isStaticAsset) {
+        // For static assets, return a simple 404 without HTML rendering
+        res.status(404).send('Not Found');
+    } else {
+        // For page requests, render the 404 page
+        res.status(404).render('404', {
+            message: "Запрашиваемая страница не найдена",
+            title: "404 - Страница не найдена",
+            path: req.path || ''
+        });
+    }
 });
 
 // Error handler
