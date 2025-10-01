@@ -6,6 +6,12 @@
   xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Технологии и жизнь - подкаст</title>
+    <description>
+      <![CDATA[Подкаст о современной жизни, философии и путешествиях, с технологической, космополитической и контркультурной точек зрения. Ведущие: Дмитрий Здоров и Василий Мязин.]]>
+    </description>
+    <content:encoded>
+      <![CDATA[Подкаст о современной жизни, философии и путешествиях, с технологической, космополитической и контркультурной точек зрения. Ведущие: Дмитрий Здоров и Василий Мязин.]]>
+    </content:encoded>
     <itunes:image href="https://www.techlifepodcast.com/images/techlife-artwork-1400-2021.jpg"/>
     <language>ru</language>
     <copyright>℗ &amp; © 2025 Techlife Syndicate</copyright>
@@ -15,6 +21,9 @@
       <title>Технологии и жизнь - подкаст</title>
       <link>https://www.techlifepodcast.com</link>
     </image>
+    <itunes:summary>
+      <![CDATA[Подкаст о современной жизни, философии и путешествиях, с технологической, космополитической и контркультурной точек зрения. Ведущие: Дмитрий Здоров и Василий Мязин.]]>
+    </itunes:summary>
     <itunes:subtitle>Ведущие: Дмитрий Здоров и Василий Мязин.</itunes:subtitle>
     <itunes:owner>
       <itunes:name>Vasily Myazin and Dmitri Zdorov</itunes:name>
