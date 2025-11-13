@@ -20,6 +20,9 @@ block content
           p Мы всегда рады получить ваши вопросы, темы для обсуждения и предложения для будущих выпусков подкаста. Расскажите нам, что вас интересует в мире технологий, философии, путешествий или современной жизни.
 
           form#question-form.my-5(method="post" action="/voprosy")
+            //- Hidden timestamp field for time-based validation
+            input(type="hidden" name="formStartTime" id="formStartTime")
+
             .form-group
               label(for="name") Ваше имя или ник
               input#name.form-control(type="text" name="name" placeholder="Как к вам обращаться?" maxlength="100")
@@ -29,6 +32,11 @@ block content
               label(for="email") Email для связи
               input#email.form-control(type="email" name="email" placeholder="your@email.com" maxlength="200")
               small.form-text.text-muted Необязательно — только если хотите получить ответ
+
+            //- Anti-bot trap: looks optional to bots, invisible to humans
+            .form-group.form-accessibility-label
+              label(for="website") Website
+              input#website.form-control(type="text" name="website" placeholder="https://yourwebsite.com" tabindex="-1" autocomplete="off")
 
             .form-group
               label(for="question") Ваш вопрос или тема *
@@ -95,6 +103,9 @@ block content
   include partials/footer
 
   script.
+    // Set form start time when page loads
+    document.getElementById('formStartTime').value = Date.now();
+
     document.getElementById('question-form').addEventListener('submit', async function(e) {
       // Check form validity first (let browser validation run)
       if (!this.checkValidity()) {

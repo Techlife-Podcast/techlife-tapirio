@@ -941,6 +941,17 @@ label {
     word-wrap: break-word;
 }
 
+// Anti-bot trap field - looks like a normal optional field to bots
+.form-accessibility-label {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
 // Mobile spacing for question form
 @media (max-width: var(--scr-width-sm)) {
     #question-form {
