@@ -1,5 +1,7 @@
 // app.js
-require('dotenv').config({ path: '.server' }); // Keep at very top
+// Load environment variables - try .server first (local), fall back to .env (standard)
+require('dotenv').config({ path: '.server' });
+require('dotenv').config(); // Will only set vars that aren't already set
 
 const createError = require("http-errors");
 const express = require("express");
