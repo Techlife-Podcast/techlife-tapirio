@@ -65,6 +65,7 @@
         "postcss-import": "^16.1.1",
         "postcss-nesting": "^13.0.2",
         "postcss-preset-env": "^10.3.0",
+        "sass-embedded": "^1.83.0",
         "supertest": "^7.1.4",
         "terser": "^5.43.1",
         "ts-node": "^10.9.2",
