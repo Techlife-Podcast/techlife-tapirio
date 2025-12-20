@@ -1,0 +1,9 @@
+node_modules
+.git
+test-results
+playwright-test-results
+playwright-report
+logs
+*.log
+.DS_Store
+tmp
