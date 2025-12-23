@@ -16,7 +16,7 @@ if path
                   td.dev-value= process.env.VERCEL_GIT_COMMIT_SHA ? process.env.VERCEL_GIT_COMMIT_SHA.substring(0, 7) : 'N/A'
                 tr
                   td.dev-label Environment
-                  td.dev-value= process.env.VERCEL_ENV || process.env.NODE_ENV || 'unknown'
+                  td.dev-value= process.env.VERCEL_ENV || 'local'
                 tr
                   td.dev-label Region
                   td.dev-value= process.env.VERCEL_REGION || 'local'
