@@ -24,3 +24,24 @@ logs/
 
 # CSS maps
 *.css.map
+
+# User submissions
+listener-questions.json
+
+# Asset manifest (generated during build)
+public/asset-manifest.json
+
+# Vite build output
+dist/
+
+# Vite generated legacy assets
+public/assets/
+
+# Test results and screenshots (keep history locally, don't commit)
+test-results/
+playwright-test-results/
+playwright-report/
+
+.vscode/
+.vercel
+.env*.local
