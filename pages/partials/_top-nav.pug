@@ -1,5 +1,7 @@
 if path
   .d-flex.justify-content-end.top-nav.align-items-center
+    if process.env.VERCEL_ENV === 'preview' || process.env.NODE_ENV === 'development'
+      .dev-indicator(title="Development Environment")
     //- a.stats-dot.me-3(href="/stats" title="Statistics")
     nav.mt-3
       ul.list-inline.mb-3
