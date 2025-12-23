@@ -1,0 +1,160 @@
+extends layout
+
+//- pages/voprosy.pug
+
+block content
+  - var pageTitle = 'Задать вопрос';
+  - var pageDescription = 'Задайте вопрос ведущим подкаста Технологии и Жизнь. Ваши вопросы и темы для обсуждения могут стать основой для будущих выпусков.';
+
+  .container.page
+    .blog-content
+      include partials/_sec-nav
+
+      .row.mb-4
+        .col
+          h2 Задать вопрос ведущим
+          h3 Ваши вопросы — наши будущие эпизоды
+        
+      .row
+        .col-lg-8
+          p Мы всегда рады получить ваши вопросы, темы для обсуждения и предложения для будущих выпусков подкаста. Расскажите нам, что вас интересует в мире технологий, философии, путешествий или современной жизни.
+
+          form#question-form.my-5(method="post" action="/voprosy")
+            //- Hidden timestamp field for time-based validation
+            input(type="hidden" name="formStartTime" id="formStartTime")
+
+            .form-group
+              label(for="name") Ваше имя или ник
+              input#name.form-control(type="text" name="name" placeholder="Как к вам обращаться?" maxlength="100")
+              small.form-text.text-muted Необязательно — можете остаться анонимным
+
+            .form-group
+              label(for="email") Email для связи
+              input#email.form-control(type="email" name="email" placeholder="your@email.com" maxlength="200")
+              small.form-text.text-muted Необязательно — только если хотите получить ответ
+
+            //- Anti-bot trap: looks optional to bots, invisible to humans
+            .form-group.form-accessibility-label
+              label(for="website") Website
+              input#website.form-control(type="text" name="website" placeholder="https://yourwebsite.com" tabindex="-1" autocomplete="off")
+
+            .form-group
+              label(for="question") Ваш вопрос или тема *
+              textarea#question.form-control(name="question" rows="6" placeholder="Расскажите подробнее о том, что вас интересует..." maxlength="2000" required)
+              small.form-text.text-muted Максимум 2000 символов
+
+            .form-group
+              label(for="category") Категория
+              select#category.form-control(name="category")
+                option(value="") Выберите категорию (необязательно)
+                option(value="technology") Технологии
+                option(value="philosophy") Философия
+                option(value="travel") Путешествия
+                option(value="security") Искусственный интеллект
+                option(value="lifestyle") Образ жизни
+                option(value="future") Будущее
+                option(value="other") Другое
+
+            .form-group.form-check
+              input#privacy.form-check-input(type="checkbox" name="privacy" required)
+              label.form-check-label(for="privacy") 
+                | Я согласен на обработку данных и понимаю, что мой вопрос может быть зачитан в эфире
+                span.text-danger *
+
+            button.btn.btn-primary(type="submit") Отправить вопрос
+
+          #submission-result.mt-3
+
+        .col-lg-4
+          .sidebar.mt-5.mt-lg-0
+            .card.border-info
+              .card-header
+                h5.card-title.mb-0 💡 Что мы обсуждаем?
+              .card-body
+                ul.list-unstyled.mb-0
+                  li.mb-2.d-flex
+                    span.mr-2 ✨
+                    span Влияние технологий на повседневную жизнь
+                  li.mb-2.d-flex
+                    span.mr-2 🤔
+                    span Философские аспекты современности
+                  li.mb-2.d-flex
+                    span.mr-2 ✈️
+                    span Путешествия и номадизм
+                  li.mb-2.d-flex
+                    span.mr-2 🔒
+                    span Кибербезопасность и приватность
+                  li.mb-2.d-flex
+                    span.mr-2 🤖
+                    span Искусственный интеллект и автоматизация
+                  li.mb-2.d-flex
+                    span.mr-2 🚀
+                    span Будущее технологий и общества
+                  li.mb-0.d-flex
+                    span.mr-2 📖
+                    span Ваши личные истории и опыт
+
+  .mt-5
+  include partials/_banner-telegram
+
+  .spacer-lg
+  include partials/header
+
+  include partials/footer
+
+  script.
+    // Set form start time when page loads
+    document.getElementById('formStartTime').value = Date.now();
+
+    document.getElementById('question-form').addEventListener('submit', async function(e) {
+      // Check form validity first (let browser validation run)
+      if (!this.checkValidity()) {
+        // Browser will show validation messages, don't prevent default
+        return;
+      }
+
+      // Only prevent default if form is valid
+      e.preventDefault();
+
+      const formData = new FormData(this);
+      const submitBtn = this.querySelector('button[type="submit"]');
+      const resultDiv = document.getElementById('submission-result');
+
+      // Convert FormData to URLSearchParams for application/x-www-form-urlencoded
+      const urlEncodedData = new URLSearchParams();
+      for (const [key, value] of formData) {
+        urlEncodedData.append(key, value);
+      }
+
+      // Disable submit button
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Отправляем...';
+
+      try {
+        const response = await fetch('/voprosy', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: urlEncodedData
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          resultDiv.innerHTML = '<div class="alert alert-success">✅ Спасибо! Ваш вопрос отправлен. Мы рассмотрим его для будущих выпусков.</div>';
+          this.reset();
+        } else {
+          resultDiv.innerHTML = '<div class="alert alert-danger">❌ ' + (result.error || 'Произошла ошибка при отправке') + '</div>';
+        }
+      } catch (error) {
+        resultDiv.innerHTML = '<div class="alert alert-danger">❌ Ошибка сети. Попробуйте еще раз.</div>';
+      }
+
+      // Re-enable submit button
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Отправить вопрос';
+
+      // Scroll to result
+      resultDiv.scrollIntoView({ behavior: 'smooth' });
+    });

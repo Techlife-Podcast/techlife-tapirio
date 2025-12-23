@@ -1,0 +1,18 @@
+{
+    "watch": [
+        "app.js",
+        "routes",
+        "pages",
+        "scripts",
+        "services"
+    ],
+    "ignore": [
+        "dist/**",
+        "public/stylesheets/**",
+        "public/assets/**",
+        "public/**/*.css",
+        "playwright-report/**",
+        "playwright-test-results/**"
+    ],
+    "ext": "js,mjs,cjs,json"
+}

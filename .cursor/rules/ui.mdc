@@ -1,0 +1,71 @@
+---
+description: UI Patterns and Styles
+globs:
+alwaysApply: true
+---
+
+## Styling Rules
+
+Refer to CLAUDE.md for comprehensive guidance.
+
+## Back Link at Top of Page
+
+```
+.row.mt-5
+  .col-sm-12.mt-2
+    p.nav-back
+      | &#8592; 
+      a(href='' onclick='') обратно
+```
+
+Here's the heading + subheading pattern to add to your cursor rules file:
+
+## Heading Patterns
+
+#### Simple Header (No Description)
+```pug
+.row
+  .col.col-lg-8
+    h2 Заголовок страницы
+    .my-5
+```
+
+#### Header with Subtitle Only
+```pug
+.row
+  .col.col-lg-8
+    h2 Основной заголовок
+    h3 Подзаголовок или краткое описание
+    .my-5
+```
+
+#### Full Header Pattern
+```pug
+.row
+  .col.col-lg-8
+    h2 Главный заголовок
+    h3 Дополнительная информация или контекст
+    .my-5
+    p Более подробное описание содержимого страницы или раздела. Здесь можно разместить введение или объяснение того, что пользователь найдёт на этой странице.
+```
+
+#### Header with Multiple Paragraphs
+```pug
+.row
+  .col.col-lg-8
+    h2 Заголовок раздела
+    h3 Подзаголовок с контекстом
+    .my-5
+    p Первый абзац с основной информацией о содержимом страницы.
+    p Второй абзац с дополнительными деталями или инструкциями для пользователя.
+```
+
+### Usage Rules for Headers
+
+1. **Always use `.row` and `.col.col-lg-8`** - Maintains consistent width and responsive behavior
+2. **h2 for main heading** - Primary page title
+3. **h3 for subheading** - Secondary descriptive text  
+4. **Always include `.my-5`** - Provides consistent spacing after headers
+5. **Follow with description paragraph** - Explain the page content
+6. **Use semantic heading hierarchy** - Don't skip heading levels
+

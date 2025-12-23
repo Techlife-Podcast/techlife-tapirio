@@ -15,8 +15,11 @@ block content
                 span.episode-num №#{item.episodeNum}
                 |  
                 span.show-episode.pseudo-link #{item.title}
+              if item.tags && item.tags.length > 0
+                .episode-tags.my-6
+                  each tag in item.tags
+                    a.tag-link(href=`/tags/${encodeURIComponent(tag)}`)
+                      span.tag # #{tag}
               .selected-box
 
   include partials/footer
-  
-  include partials/_player

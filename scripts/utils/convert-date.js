@@ -1,25 +1,49 @@
 // scripts/utils/convert-date.js
 
-const moment = require("moment");
-require("moment/locale/ru");
+const dayjs = require("dayjs");
+const utc = require('dayjs/plugin/utc');
+const customParseFormat = require('dayjs/plugin/customParseFormat');
+const localeData = require('dayjs/plugin/localeData');
+require('dayjs/locale/ru');
+
+dayjs.extend(utc);
+dayjs.extend(customParseFormat);
+dayjs.extend(localeData);
 
 function parseFlexibleDate(dateString) {
-  const formats = ["ddd, D MMM YYYY HH:mm:ss [UTC]", "ddd, D MMM YYYY HH:mm [UTC]"];
-  let parsedDate = moment(dateString, formats, 'en', true);
+    // Support RFC 2822 with numeric TZ (e.g. "+0000"), UTC/GMT suffixes, and ISO variants
+    const formats = [
+        "ddd, D MMM YYYY HH:mm:ss ZZ",
+        "ddd, D MMM YYYY HH:mm ZZ",
+        "ddd, D MMM YYYY HH:mm:ss [UTC]",
+        "ddd, D MMM YYYY HH:mm [UTC]",
+        "ddd, D MMM YYYY HH:mm:ss [GMT]",
+        "ddd, D MMM YYYY HH:mm [GMT]",
+        "YYYY-MM-DDTHH:mm:ss.SSSZ",
+        "YYYY-MM-DDTHH:mm:ssZ"
+    ];
 
-  if (!parsedDate.isValid()) {
-    const regex = /(\w{3}), (\d{1,2}) (\w{3}) (\d{4}) (\d{2}):(\d{2})(?::(\d{2}))? UTC/;
-    const match = dateString.match(regex);
-    if (match) {
-      const [, , day, monthStr, year, hours, minutes, seconds] = match;
-      const month = moment().month(monthStr).format('M') - 1;
-      parsedDate = moment.utc([year, month, day, hours, minutes, seconds || 0]);
+    // Try parsing with the known formats
+    let parsedDate;
+    for (const format of formats) {
+        parsedDate = dayjs(dateString, format, true);
+        if (parsedDate.isValid()) break;
+        // Also try forcing UTC interpretation where appropriate
+        parsedDate = dayjs.utc(dateString, format, true);
+        if (parsedDate.isValid()) break;
     }
-  }
 
-  return parsedDate.isValid() ? parsedDate.locale('ru').format('D MMMM YYYY') : 'Дата не указана';
+    // Fallback: rely on native Date parsing for common RFC 2822/ISO strings
+    if (!parsedDate || !parsedDate.isValid()) {
+        const nativeDate = new Date(dateString);
+        if (!isNaN(nativeDate.getTime())) {
+            parsedDate = dayjs(nativeDate);
+        }
+    }
+
+    return parsedDate && parsedDate.isValid() ? parsedDate.locale('ru').format('D MMMM YYYY') : 'Дата не указана';
 }
 
 module.exports = {
-  parseFlexibleDate
+    parseFlexibleDate
 };

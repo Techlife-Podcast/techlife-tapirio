@@ -18,7 +18,35 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd /var/www/techlifepodcast.com
+            # Reset any local changes to ensure clean deployment
+            git reset --hard HEAD
+            git clean -fd
+            # Pull latest changes
             git pull origin master
-            npm install --production
+            # Install all dependencies temporarily for building
+            npm install
+            # Build SCSS and assets with cache busting
+            echo "🎨 Compiling SCSS..."
+            echo "📄 SCSS source file timestamp:"
+            ls -la scss/styles.scss
+            echo "📄 CSS file before build:"
+            ls -la public/stylesheets/styles.css || echo "CSS file doesn't exist yet"
+            # Remove existing CSS to force fresh compilation
+            rm -f public/stylesheets/styles.css
+            rm -f public/stylesheets/styles.css.map
+            npm run build-prod
+            echo "📄 CSS file after build:"
+            ls -la public/stylesheets/styles.css
+            echo "🔨 Building assets with cache busting..."
+            npm run cache-bust
+            # Show generated manifest for logging
+            if [ -f "public/asset-manifest.json" ]; then
+              echo "📄 Generated asset manifest:"
+              cat public/asset-manifest.json
+            fi
+            # Clean up dev dependencies for production
+            npm prune --omit=dev
+            # Restart application
             mkdir -p tmp
             touch tmp/restart.txt
+            echo "✅ Deployment with cache busting completed"

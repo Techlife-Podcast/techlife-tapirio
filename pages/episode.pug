@@ -12,6 +12,12 @@ block content
         h2 №#{episode.episodeNum} #{episode.title}
         h4= episode['itunes:subtitle']
         
+        if episode.tags && episode.tags.length > 0
+          .episode-tags.mt-4.mb-6
+            each tag in episode.tags
+              a.tag-link(href=`/tags/${encodeURIComponent(tag)}`)
+                span.tag # #{tag}
+        
         .player.my-3
           .btn-play Play
         p.mb-4
@@ -35,5 +41,3 @@ block content
   include partials/header
 
   include partials/footer
-
-  include partials/_player

@@ -1,6 +1,6 @@
 const request = require('supertest');
 const app = require('../app');
-const router = require('../routes/index');
+const router = require('../routes/router');
 
 const Project = require('../scripts/app.functions');
 

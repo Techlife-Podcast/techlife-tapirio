@@ -1,208 +1,190 @@
+// scss/styles.scss
 @import url("https://unpkg.com/css.gg/icons/all.css");
-@import "bootstrap/_functions.scss";
-@import "bootstrap/_variables.scss";
-@import "bootstrap/_breakpoints.scss";
-@import "_variables.scss";
-@import "_mixins.scss";
+@import "bootstrap/functions";
+@import "bootstrap/variables";
+@import "bootstrap/breakpoints";
+@import "_variables";
+@import "_mixins";
+@import "stats";
+
+/* Note: CSS Custom Properties are now centralized in _variables.scss */
 
 body {
-  background-color: $black;
-  background-position: center top;
-  background-size: 100%;
-  background-repeat: no-repeat;
-  font-family: "Fira Sans", "Helvetica Nueu", Arial, sans-serif;
-  font-weight: 400;
-  color: #fff;
-
-  // &[class*="resources"] {
-  // }
-
-  &[class*="guests"] {
-    background: linear-gradient(
-      180deg,
-      #111111 0%,
-      #031b28 73.4%,
-      #111111 97.88%
-    );
-  }
-
-  &[class*="stats"] {
-    background: linear-gradient(
-      180deg,
-      #111111 0%,
-      #031b28 73.4%,
-      #111111 97.88%
-    );
-  }
+    background-color: var(--black);
+    background-position: center top;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    font-family: "Fira Sans", "Helvetica Nueu", Arial, sans-serif;
+    font-weight: 400;
+    color: #fff;
+    // &[class*="resources"] {
+    // }
+    &[class*="guests"] {
+        background: linear-gradient( 180deg, #111111 0%, #031b28 73.4%, #111111 97.88%);
+    }
+    &[class*="stats"] {
+        background: linear-gradient( 180deg, #111111 0%, #031b28 73.4%, #111111 97.88%);
+    }
 }
 
-@media (max-width: $min-scr-width) {
-  body {
-    background-position: calc(100% - 0px) top;
-    background-size: 130%;
-  }
+@media (max-width: var(--min-scr-width)) {
+    body {
+        background-position: calc(100% - 0px) top;
+        background-size: 130%;
+    }
 }
 
 .hide {
-  display: none;
+    display: none;
 }
 
 .no-wrap {
-  white-space: nowrap;
+    white-space: nowrap;
 }
 
 p,
 li {
-  font-size: $font-s3;
-  color: #f2f2f2;
-  line-height: 1.6;
+    font-size: var(--font-s3);
+    color: #f2f2f2;
+    line-height: 1.6;
 }
 
 p {
-  margin-bottom: 1.5rem;
-
-  &.lh-1 {
-    line-height: 1;
-  }
-  &.lh-1_2 {
-    line-height: 1.2;
-  }
+    margin-bottom: 1.5rem;
+    &.lh-1 {
+        line-height: 1;
+    }
+    &.lh-1_2 {
+        line-height: 1.2;
+    }
 }
 
 p.small {
-  font-size: $font-s4;
+    font-size: var(--font-s4);
 }
 
-b, strong {
-  font-weight: 600;
+b,
+strong {
+    font-weight: 600;
 }
 
 a,
 .pseudo-link {
-  color: #fff;
-  border-bottom: 1px solid $light-grey;
-
-  &:hover {
-    cursor: pointer;
     color: #fff;
-    text-decoration: none;
-    border-bottom-color: darken($light-grey, 50%);
-  }
+    border-bottom: 1px solid var(--light-grey);
+    &:hover {
+        cursor: pointer;
+        color: #fff;
+        text-decoration: none;
+        border-bottom-color: var(--light-grey-darker);
+    }
 }
 
 a.link-ext {
-  color: $black;
-  background: #fff;
-  border: none;
+    color: var(--black);
+    background: #fff;
+    border: none;
 }
 
 .reset-link-style {
-  border-bottom: 0;
+    border-bottom: 0;
 }
 
 .mask-link-style {
-  border-bottom: 1px black solid;
+    border-bottom: 1px black solid;
 }
 
 h1 {
-  text-align: center;
-  margin: 0 0 1% 0;
+    text-align: center;
+    margin: 0 0 1% 0;
 }
 
 h2 {
-  font-weight: 600;
-  line-height: 1;
-  font-size: $font-s1;
-  color: $accent;
-  text-shadow: #000000ee 1px 1px 0;
-  margin-top: 1.8vw;
+    font-weight: 600;
+    line-height: 1;
+    font-size: var(--font-s1);
+    color: var(--accent);
+    text-shadow: #000000ee 1px 1px 0;
+    margin-top: 1.8vw;
 }
 
 h3 {
-  font-size: $font-s2;
-  font-weight: 600;
-
-  .small-caps {
-    font-size: 80%;
-    font-weight: 300;
-    text-transform: uppercase;
-  }
-
-  * + .small-caps {
-    padding-left: 10px;
-  }
+    font-size: var(--font-s2);
+    font-weight: 600;
+    .small-caps {
+        font-size: 80%;
+        font-weight: 300;
+        text-transform: uppercase;
+    }
+    *+.small-caps {
+        padding-left: 10px;
+    }
 }
 
 h4 {
-  font-size: $font-s3;
-  font-weight: 600;
+    font-size: var(--font-s3);
+    font-weight: 600;
 }
 
 h3,
 h4,
 h5 {
-  color: #aaa;
+    color: #aaa;
 }
 
-h3 + h2 {
-  margin-top: 1vw;
+h3+h2 {
+    margin-top: 1vw;
 }
 
 // font sizes XS
-
-@media screen and (min-width: $max-scr-width) {
-  h1 {
-    font-size: 9.2vw;
-  }
+@media screen and (min-width: var(--max-scr-width)) {
+    h1 {
+        font-size: 9.2vw;
+    }
 }
 
-@media (min-width: $min-scr-width) and (max-width: $scr-width-sm) {
-  p,
-  li {
-    font-size: $font-s4;
-  }
-
-  h1 {
-    font-size: 9.4vw;
-  }
-
-  h2 {
-    font-size: $font-s2;
-  }
-
-  h3 {
-    font-size: $font-s3;
-
-    .small-caps {
-      font-size: 66%;
+@media (min-width: var(--min-scr-width)) and (max-width: var(--scr-width-sm)) {
+    p,
+    li {
+        font-size: var(--font-s4);
     }
-  }
-
-  h4 {
-    font-size: $font-s4;
-    font-weight: 600;
-  }
+    h1 {
+        font-size: 9.4vw;
+    }
+    h2 {
+        font-size: var(--font-s2);
+    }
+    h3 {
+        font-size: var(--font-s3);
+        .small-caps {
+            font-size: 66%;
+        }
+    }
+    h4 {
+        font-size: var(--font-s4);
+        font-weight: 600;
+    }
 }
 
 // font sizes SM
-@media (min-width: $scr-width-xs) and (max-width: $scr-width-sm) {
-  h2 {
-    font-size: $font-s3;
-  }
+@media (min-width: var(--scr-width-xs)) and (max-width: var(--scr-width-sm)) {
+    h2 {
+        font-size: var(--font-s3);
+    }
 }
 
 pre {
-  color: #ffffffaa;
+    color: #ffffffaa;
 }
 
 .master-container {
-  max-width: $max-scr-width;
-  margin: 0 auto;
+    max-width: var(--max-scr-width);
+    margin: 0 auto;
 }
 
 .top-nav {
-  margin-bottom: -1rem;
-  padding: 0 2rem;
+    margin-bottom: -1rem;
+    padding: 0 2rem;
 }
 
 .dev-indicator-wrapper {
@@ -229,7 +211,7 @@ pre {
   position: absolute;
   top: 30px;
   right: -8px; // Align with indicator (16px circle / 2 = 8px)
-  background-color: rgba($dark-grey, 0.98);
+  background-color: color-mix(in srgb, var(--dark-grey) 98%, transparent);
   border: 2px solid #ff6600;
   border-radius: 8px;
   min-width: 300px;
@@ -257,11 +239,11 @@ pre {
 
 .dev-popover-header {
   background-color: #ff6600;
-  color: $black;
+  color: var(--black);
   padding: 0.5rem 0.75rem;
   font-weight: 600;
   border-radius: 6px 6px 0 0;
-  font-size: $font-s5;
+  font-size: var(--font-s5);
   text-align: center;
 }
 
@@ -272,11 +254,11 @@ pre {
 .dev-info-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: $font-s5;
+  font-size: var(--font-s5);
 
   td {
     padding: 0.5rem 0.75rem;
-    border-bottom: 1px solid rgba($mid-grey, 0.2);
+    border-bottom: 1px solid color-mix(in srgb, var(--mid-grey) 20%, transparent);
   }
 
   tr:last-child td {
@@ -284,28 +266,28 @@ pre {
   }
 
   .dev-label {
-    color: $mid-grey;
+    color: var(--mid-grey);
     white-space: nowrap;
     font-weight: 400;
     width: 35%;
   }
 
   .dev-value {
-    color: $accent;
+    color: var(--accent);
     text-align: left;
     word-break: break-word;
     font-weight: 600;
   }
 
   a.dev-link {
-    color: $accent;
+    color: var(--accent);
     text-decoration: none;
     border-bottom: 1px solid transparent;
     word-break: break-all;
     font-weight: 600;
 
     &:hover {
-      border-bottom-color: $accent;
+      border-bottom-color: var(--accent);
       opacity: 0.9;
     }
   }
@@ -332,614 +314,1032 @@ pre {
 }
 
 a.d-flex {
-  text-decoration: none; 
-  border: none;
-  &:hover {
-    p {
-      color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    border: none;
+    &:hover {
+        p {
+            color: rgba(255, 255, 255, 0.7);
+        }
     }
-  }
+    // Preserve dark-box border when used as a link
+    &.dark-box {
+        border: 2px solid var(--mid-grey);
+    }
 }
+
+
+/* Modern CSS Example 2: Native CSS Nesting (no preprocessor needed) */
 
 .nav-pill {
-  display: inline-block;
-  background-color: $dark-grey;
-  text-decoration: none;
-  border: 0;
-  border-radius: 3px;
-  color: $light-grey;
-  padding: 8px 20px;
-  line-height: 1;
-  font-weight: 600;
-  letter-spacing: 0.07rem;
-
-  svg {
-    margin: -5px 0 0;
-  }
-
-  &:hover:not(.active) {
-    svg {
-      path {
-        fill: #fff;
-      }
+    display: inline-block;
+    background-color: var(--dark-grey);
+    text-decoration: none;
+    border: 0;
+    border-radius: 3px;
+    color: var(--light-grey);
+    padding: 8px 20px;
+    line-height: 1;
+    font-weight: 600;
+    letter-spacing: 0.07rem;
+    /* Modern CSS nesting - works directly in browsers */
+    & svg {
+        margin: -5px 0 0;
     }
-  }
-
-  &.active {
-    color: $accent;
-
-    path {
-      fill: $accent;
+    /* Nested hover state with modern color mixing */
+    &:hover:not(.active) {
+        background-color: var(--accent-hover);
     }
-  }
+    &:hover:not(.active) svg path {
+        fill: #fff !important;
+    }
+    /* Active state using CSS custom properties */
+    &.active {
+        color: var(--accent-color);
+        background-color: var(--accent-active);
+    }
+    &.active path {
+        fill: #fff !important;
+    }
 }
 
-@media screen and (max-width: $scr-width-sm) {
-  .top-nav {
-    padding: 0;
-  }
-
-  .nav-pill {
-    svg {
-      height: 22px;
+@media screen and (max-width: var(--scr-width-sm)) {
+    .top-nav {
+        padding: 0;
     }
-  }
+    .nav-pill {
+        svg {
+            height: 22px;
+        }
+    }
 }
 
 .episode-list {
-  list-style: none;
-  margin: 20px 0 0;
-  padding: 0;
-  font-size: $font-s3;
-  color: $mid-grey;
-
-  li {
-    position: relative;
-    padding-left: 75px;
-    margin-bottom: 10px;
-    line-height: 1.3;
-
-    &.selected {
-      box-sizing: border-box;
-      padding: 25px 25px 25px 120px;
-      margin-left: -25px;
-      margin-right: -25px;
-      margin-bottom: $font-s2;
-
-      .num-and-title {
-        display: none;
-      }
-
-      &:after {
-        content: "";
-        position: absolute;
-        top: 22px;
-        left: -70px;
-        width: 60px;
-        height: 38px;
-        background-image: url(/images/icon-pointer.svg);
-        background-size: 100%;
-        background-repeat: no-repeat;
-      }
+    list-style: none;
+    margin: 20px 0 0;
+    padding: 0;
+    font-size: var(--font-s3);
+    color: var(--mid-grey);
+    li {
+        position: relative;
+        padding-left: 75px;
+        margin-bottom: 10px;
+        line-height: 1.3;
+        &.selected {
+            box-sizing: border-box;
+            padding: 25px 25px 25px 120px;
+            margin-left: -25px;
+            margin-right: -25px;
+            margin-bottom: var(--font-s2);
+            .num-and-title {
+                display: none;
+            }
+            &:after {
+                content: "";
+                position: absolute;
+                top: 22px;
+                left: -70px;
+                width: 60px;
+                height: 38px;
+                background-image: url(/images/icon-pointer.svg);
+                background-size: 100%;
+                background-repeat: no-repeat;
+            }
+        }
     }
-  }
-
-  .episode-num {
-    position: absolute;
-    left: 0;
-    top: 0;
-  }
+    .episode-num {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
 }
+
+
+/* Modern CSS Example 1: Using CSS custom properties with color-mix() */
 
 .dark-box,
 .episode-list li.selected {
-  border: 2px solid $mid-grey;
-  background-color: rgba(0, 0, 0, 0.6);
+    border: 2px solid var(--mid-grey);
+    /* Modern color-mix creates consistent semi-transparent backgrounds */
+    background-color: var(--background-overlay);
+    /* Enhanced with modern CSS features */
+    &:hover {
+        border-color: var(--accent-hover);
+    }
 }
 
 .date {
-  white-space: nowrap;
+    white-space: nowrap;
 }
 
 @media screen and (max-width: 576px) {
-  .episode-list li.selected {
-    background: #333;
-    border: 0;
-    padding-left: 25px;
-    margin-left: -15px;
-    margin-right: -15px;
-
-    .episode-num {
-      position: static;
+    .episode-list li.selected {
+        background: #333;
+        border: 0;
+        padding-left: 25px;
+        margin-left: -15px;
+        margin-right: -15px;
+        .episode-num {
+            position: static;
+        }
+        .date {
+            display: block;
+            padding-left: 0;
+            margin-top: 5px;
+        }
     }
-
-    .date {
-      display: block;
-      padding-left: 0;
-      margin-top: 5px;
-    }
-  }
 }
 
 // font sizes XS
-@media (min-width: $min-scr-width) and (max-width: $scr-width-sm) {
-  .episode-list {
-    font-size: $font-s4;
-  }
+@media (min-width: var(--min-scr-width)) and (max-width: var(--scr-width-sm)) {
+    .episode-list {
+        font-size: var(--font-s4);
+    }
 }
 
 .selected-box {
-  position: relative;
-
-  .episode-num {
-    left: -97px;
-  }
-
-  div > h3,
-  h4 {
-    padding-right: 75px;
-    margin-bottom: 1.5rem;
-  }
-
-  .player {
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
+    position: relative;
+    .episode-num {
+        left: -97px;
+    }
+    div>h3,
+    h4 {
+        padding-right: 75px;
+        margin-bottom: 1.5rem;
+    }
+    .player {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
 }
 
 .episode-desc {
-  position: relative;
-  font-size: $font-s3;
-  color: $mid-grey;
-
-  > p {
-    width: calc(100% - 100px);
-  }
-
-  p {
-    line-height: 1.35;
-    color: $light-grey;
-
-    &:last-of-type {
-      margin-bottom: 0;
+    position: relative;
+    font-size: var(--font-s3);
+    color: var(--mid-grey);
+    >p {
+        width: calc(100% - 100px);
     }
-  }
-
-  ul,
-  ol {
-    margin: 0 0 2rem;
-    padding: 0;
-
-    li {
-      padding-left: 0;
-      margin-left: 20px;
-      margin-bottom: 10px;
-      color: $light-grey;
-      line-height: 1.55;
-
-      a {
-        b {
-          color: white;
+    p {
+        line-height: 1.35;
+        color: var(--light-grey);
+        &:last-of-type {
+            margin-bottom: 0;
         }
-      }
     }
-  }
-
-  img {
-    max-width: 600px;
-    width: 100%;
-  }
-}
-
-@media (max-width: $scr-width-sm) {
-  .episode-desc {
-    > p {
-      width: auto;
+    ul,
+    ol {
+        margin: 0 0 2rem;
+        padding: 0;
+        li {
+            padding-left: 0;
+            margin-left: 20px;
+            margin-bottom: 10px;
+            color: var(--light-grey);
+            line-height: 1.55;
+            a {
+                b {
+                    color: white;
+                }
+            }
+        }
     }
-  }
+    img {
+        max-width: 600px;
+        width: 100%;
+    }
 }
 
-@media (min-width: $min-scr-width) and (max-width: $scr-width-sm) {
-  .episode-desc {
-    font-size: $font-s4;
-  }
+@media (max-width: var(--scr-width-sm)) {
+    .episode-desc {
+        >p {
+            width: auto;
+        }
+    }
 }
 
-@media (max-width: $min-scr-width) {
-  .spacer-xs {
-    height: 25vw;
-  }
+@media (min-width: var(--min-scr-width)) and (max-width: var(--scr-width-sm)) {
+    .episode-desc {
+        font-size: var(--font-s4);
+    }
 }
 
-@media (min-width: $min-scr-width) and (max-width: 768px) {
-  .spacer-sm {
-    height: 20vw;
-  }
+@media (max-width: var(--min-scr-width)) {
+    .spacer-xs {
+        height: 25vw;
+    }
+}
+
+@media (min-width: var(--min-scr-width)) and (max-width: 768px) {
+    .spacer-sm {
+        height: 20vw;
+    }
 }
 
 @media (min-width: 769px) and (max-width: 992px) {
-  .spacer-md {
-    height: 20vw;
-  }
+    .spacer-md {
+        height: 20vw;
+    }
 }
 
 @media screen and (min-width: 993px) {
-  .spacer-lg {
-    height: 10vw;
-  }
+    .spacer-lg {
+        height: 10vw;
+    }
 }
 
 .bulleted {
-  list-style: none;
-  list-style-type: disc;
-  list-style-position: outside;
+    list-style: none;
+    list-style-type: disc;
+    list-style-position: outside;
 }
 
-@media (min-width: $scr-width-sm) {
-  .nav-back {
-    margin-left: -1.9rem;
-  }
+@media (min-width: var(--scr-width-sm)) {
+    .nav-back {
+        margin-left: -1.9rem;
+    }
 }
 
 .footer .row {
-  margin: 80px 0 0;
-
-  p {
-    font-size: $font-s4;
-    color: $mid-grey;
-
-    @media screen and (max-width: $scr-width-sm) {
-      font-size: $font-s5;
+    margin: 80px 0 0;
+    p {
+        font-size: var(--font-s4);
+        color: var(--mid-grey);
+        @media screen and (max-width: var(--scr-width-sm)) {
+            font-size: var(--font-s5);
+        }
     }
-  }
 }
 
 .btn {
-  border-radius: 3px;
-  font-weight: 600;
-  letter-spacing: 0.07rem;
+    border-radius: 3px;
+    font-weight: 600;
+    letter-spacing: 0.07rem;
 }
 
 .btn-primary {
-  background-color: $accent;
-  color: white;
-  border-color: $accent;
+    background-color: var(--accent);
+    color: var(--black);
+    border-color: var(--accent);
 }
 
 .btn-secondary {
-  background-color: darken($accent, 20%);
-  color: white;
-  border-color: darken($accent, 20%);
-
-  &:hover {
-    background-color: darken($accent, 40%);
-  }
+    background-color: var(--accent-active);
+    color: white;
+    border-color: var(--accent-active);
+    &:hover {
+        background-color: color-mix(in srgb, var(--accent) 60%, black);
+    }
 }
 
 .btn-lg {
-  font-size: $font-s3;
+    font-size: var(--font-s3);
 }
 
 .btn-play {
-  display: inline-block;
-  width: 66px;
-  height: 66px;
-  background-image: url(/images/btn-play.svg);
-  background-repeat: no-repeat;
-  background-size: 100%;
-  cursor: pointer;
-  text-indent: -4000px;
-
-  &:hover {
-    opacity: 0.7;
-  }
-
-  &.is-playing,
-  &[data-is-playing="true"] {
-    background-image: url(/images/btn-pause.svg);
-    position: relative;
-
-    &::after {
-      content: "";
-      position: absolute;
-      left: 1px;
-      right: 1px;
-      top: 1px;
-      bottom: 1px;
-      border: 3px dotted $black;
-      border-radius: 50%;
-      animation: rotating 20s linear infinite;
+    display: inline-block;
+    width: 66px;
+    height: 66px;
+    background-image: url(/images/btn-play.svg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    cursor: pointer;
+    text-indent: -4000px;
+    &:hover {
+        opacity: 0.7;
     }
-  }
+    &.is-playing,
+    &[data-is-playing="true"] {
+        background-image: url(/images/btn-pause.svg);
+        position: relative;
+        &::after {
+            content: "";
+            position: absolute;
+            left: 1px;
+            right: 1px;
+            top: 1px;
+            bottom: 1px;
+            border: 3px dotted var(--black);
+            border-radius: 50%;
+            animation: rotating 20s linear infinite;
+        }
+    }
 }
 
 @keyframes rotating {
-  from {
-    -ms-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  to {
-    -ms-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
+    from {
+        -ms-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to {
+        -ms-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
 }
 
 .textual {
-  h3 {
-    color: #f2f2f2;
-  }
-
-  p {
-    color: #ffffffcc;
-    text-shadow: #000000ee 1px 1px 0;
-  }
+    h3 {
+        color: #f2f2f2;
+    }
+    p {
+        color: #ffffffcc;
+        text-shadow: #000000ee 1px 1px 0;
+    }
 }
 
 // Episode Nav
-
 .episode-nav {
-  font-size: $font-s4;
-  padding: 0 50px;
-
-  a {
-    border: 0;
-    display: inline-block;
-    position: relative;
-    line-height: 1.4;
-
-    .arrow {
-      height: 60px;
-      position: absolute;
-      top: 10px;
-
-      &.prev {
-        left: -50px;
-        transform: rotate(180deg);
-      }
-      &.next {
-        right: -50px;
-      }
-    }
-
-    &:hover {
-      opacity: 0.8;
-    }
-  }
-
-  .num {
-    color: $accent;
-  }
-
-  @media (max-width: $scr-width-sm) {
-    padding: 0 25px;
-
+    font-size: var(--font-s4);
+    padding: 0 50px;
     a {
-      .arrow {
-        height: 40px;
-
-        &.prev {
-          left: -30px;
+        border: 0;
+        display: inline-block;
+        position: relative;
+        line-height: 1.4;
+        .arrow {
+            height: 60px;
+            position: absolute;
+            top: 10px;
+            &.prev {
+                left: -50px;
+                transform: rotate(180deg);
+            }
+            &.next {
+                right: -50px;
+            }
         }
-        &.next {
-          right: -30px;
+        &:hover {
+            opacity: 0.8;
         }
-      }
     }
-  }
+    .num {
+        color: var(--accent);
+    }
+    @media (max-width: var(--scr-width-sm)) {
+        padding: 0 25px;
+        a {
+            .arrow {
+                height: 40px;
+                &.prev {
+                    left: -30px;
+                }
+                &.next {
+                    right: -30px;
+                }
+            }
+        }
+    }
 }
 
 // 404
-
 .huge {
-  font-size: 260px;
-  line-height: 1;
+    font-size: 260px;
+    line-height: 1;
 }
 
 // Subscribe Links
-
 .sub-list {
-  -moz-columns: 2;
-  -webkit-columns: 2;
-  columns: 2;
-
-  li {
-    margin-bottom: .8rem;
-    font-size: $font-s4;
-    display: inline-block;
-    width: 100%;
-
-    a {
-      border-bottom-width: 0;
-      display: block;
-      transition: all 0.1s ease-in-out;
-      
-      img {
-        margin-right: 8px;
-        transition: all 0.1s ease-in-out;
-      }
-      
-      span {
-        border-bottom: 1px solid $light-grey;
-        transition: all 0.1s ease-in-out;
-      }
-      
-      &:hover {       
-        img {
-          margin-right: 10px;
-        }
-        span {
-          border-bottom-width: 0;
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: $scr-width-sm) {
-  .sub-list {
+    -moz-columns: 2;
+    -webkit-columns: 2;
+    columns: 2;
     li {
-      font-size: $font-s5;
+        margin-bottom: .8rem;
+        font-size: var(--font-s4);
+        display: inline-block;
+        width: 100%;
+        a {
+            border-bottom-width: 0;
+            display: block;
+            transition: all 0.1s ease-in-out;
+            img {
+                margin-right: 8px;
+                transition: all 0.1s ease-in-out;
+            }
+            span {
+                border-bottom: 1px solid var(--light-grey);
+                transition: all 0.1s ease-in-out;
+            }
+            &:hover {
+                img {
+                    margin-right: 10px;
+                }
+                span {
+                    border-bottom-width: 0;
+                }
+            }
+        }
     }
-  }
 }
 
-@media screen and (min-width: $scr-width-sm) and (max-width: 991px) {
-  .sub-list {
-    columns: 3;
-    -webkit-columns: 3;
-    -moz-columns: 3;
-  }
+@media (max-width: var(--scr-width-sm)) {
+    .sub-list {
+        li {
+            font-size: var(--font-s5);
+        }
+    }
 }
 
-@media screen and (min-width: 992px) and (max-width: $scr-width-lg) {
-  .sub-list {
-    columns: 1;
-    -webkit-columns: 1;
-    -moz-columns: 1;
-  }
+@media screen and (min-width: var(--scr-width-sm)) and (max-width: 991px) {
+    .sub-list {
+        columns: 3;
+        -webkit-columns: 3;
+        -moz-columns: 3;
+    }
+}
+
+@media screen and (min-width: 992px) and (max-width: var(--scr-width-lg)) {
+    .sub-list {
+        columns: 1;
+        -webkit-columns: 1;
+        -moz-columns: 1;
+    }
 }
 
 // Player Player
-
 .player-wrapper {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  padding: 10px 30px;
-  background-color: #000000dd;
-  display: flex;
-  align-items: center;
-  transform: translateY(100%);
-  transition: transform 0.5s ease-in-out;
-
-  &.active {
-    transform: translateY(0%);
-  }
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 10px 30px;
+    background-color: #000000dd;
+    display: flex;
+    align-items: center;
+    transform: translateY(100%);
+    transition: transform 0.5s ease-in-out;
+    &.active {
+        transform: translateY(0%);
+    }
 }
 
 .progress-wrapper {
-  flex: 1;
+    flex: 1;
 }
 
 .progress-bard {
-  position: relative;
-  width: 100%;
-  height: 10px;
-  background: #ffffffcc;
-  border-radius: 50px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #fff;
-  }
-
-  .so-far {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 0;
-    background-color: $accent;
-    border-radius: 50px 0 0 50px;
-  }
+    position: relative;
+    width: 100%;
+    height: 10px;
+    background: #ffffffcc;
+    border-radius: 50px;
+    cursor: pointer;
+    &:hover {
+        background-color: #fff;
+    }
+    .so-far {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 0;
+        background-color: var(--accent);
+        border-radius: 50px 0 0 50px;
+    }
 }
 
 .list-inline {
-  .badge {
-    font-size: 100%;
-  }
+    .badge {
+        font-size: 100%;
+    }
 }
 
 .avatar {
-  border-radius: 50%;
-  max-width: 150px;
+    border-radius: 50%;
+    max-width: 150px;
 }
 
 blockquote {
-  font-style: oblique;
+    font-style: oblique;
 }
 
 .banner {
-  background-color: $light-grey;
-
-  p {
-    font-size: $font-s4;
-    color: $dark-grey;
-  }
+    background-color: var(--light-grey);
+    p {
+        font-size: var(--font-s4);
+        color: var(--dark-grey);
+    }
 }
 
-@media (max-width: $scr-width-sm) {
-  .banner {
-    p {
-      font-size: $font-s5;
+@media (max-width: var(--scr-width-sm)) {
+    .banner {
+        p {
+            font-size: var(--font-s5);
+        }
     }
-  }
 }
 
 .with-bg {
-  padding: 0.35rem 0.5rem;
-  background-color: $dark-grey;
-  color: white;
-  display: inline-block;
+    padding: 0.35rem 0.5rem;
+    background-color: var(--dark-grey);
+    color: white;
+    display: inline-block;
 }
 
 .callout {
-  padding: 2rem;
-  margin: auto -2rem;
-  border: 1px solid $light-grey;
-
-  p {
-    color: white;
-
-    &:last-child {
-      margin-bottom: 0;
+    padding: 2rem;
+    margin: auto -2rem;
+    border: 1px solid var(--light-grey);
+    p {
+        color: white;
+        &:last-child {
+            margin-bottom: 0;
+        }
     }
-  }
-
-  li {
-    margin-bottom: 0.5rem;
-  }
-
-  &.accented {
-    background-color: $accent;
-    border: 0;
-
-    p,
     li {
-      color: $black;
+        margin-bottom: 0.5rem;
     }
-  }
-
-  @media (max-width: $scr-width-sm) {
-    margin: auto -0.9rem;
-  }
+    &.accented {
+        background-color: var(--accent);
+        border: 0;
+        p,
+        li {
+            color: var(--black);
+        }
+    }
+    @media (max-width: var(--scr-width-sm)) {
+        margin: auto -0.9rem;
+    }
 }
 
 img.hero-image {
-  position: absolute;
-  z-index: -1;
-  width: 100%;
+    position: absolute;
+    z-index: -1;
+    width: 100%;
 }
 
 .error-page {
-  background: url(/images/bg-404-concrete.jpg) no-repeat center center;
-  background-size: cover;
-  height: 100vh;
+    background: url(/images/bg-404-concrete.jpg) no-repeat center center;
+    background-size: cover;
+    height: 100vh;
 }
 
-@import "stats.scss";
+// Forms - matching site design system
+.form-group {
+    margin-bottom: 1.5rem;
+}
 
+.form-control {
+    background-color: color-mix(in srgb, var(--dark-grey) 80%, transparent);
+    border: 1px solid var(--mid-grey);
+    color: #f2f2f2;
+    font-size: var(--font-s4);
+    padding: 0.75rem;
+    border-radius: 3px;
+    &:focus {
+        background-color: color-mix(in srgb, var(--dark-grey) 90%, transparent);
+        border-color: var(--accent);
+        box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--accent) 25%, transparent);
+        color: #fff;
+    }
+    &::placeholder {
+        color: var(--mid-grey);
+    }
+}
+
+textarea.form-control {
+    min-height: 120px;
+    resize: vertical;
+}
+
+label {
+    font-size: var(--font-s4);
+    color: var(--light-grey);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.form-text {
+    font-size: var(--font-s5);
+    color: var(--mid-grey);
+    margin-top: 0.25rem;
+}
+
+.form-check {
+    .form-check-input {
+        margin-top: 0.25rem;
+    }
+    .form-check-label {
+        font-size: var(--font-s4);
+        color: var(--light-grey);
+        margin-left: 0.25rem;
+    }
+}
+
+// Tables - matching site design system  
+.table {
+    color: #f2f2f2;
+    font-size: var(--font-s4);
+    th {
+        background-color: var(--dark-grey);
+        color: #fff;
+        font-size: var(--font-s4);
+        font-weight: 600;
+        border-color: var(--mid-grey);
+        padding: 1rem 0.75rem;
+    }
+    td {
+        border-color: color-mix(in srgb, var(--mid-grey) 30%, transparent);
+        padding: 0.75rem;
+        vertical-align: middle;
+    }
+    &.table-hover tbody tr:hover {
+        background-color: color-mix(in srgb, var(--accent) 25%, transparent);
+        color: #fff;
+        transition: all 0.2s ease-in-out;
+        box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 30%, transparent);
+        // Improve text contrast on hover
+        td {
+            color: #fff;
+        }
+        // Enhance badge visibility on hover
+        .badge {
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2);
+        }
+        // Make links more visible on hover
+        a {
+            color: #fff;
+            border-bottom-color: rgba(255, 255, 255, 0.6);
+            &:hover {
+                border-bottom-color: #fff;
+            }
+        }
+    }
+}
+
+.table-responsive {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border: 1px solid color-mix(in srgb, var(--mid-grey) 30%, transparent);
+}
+
+// Cards - simplified and consistent
+.card {
+    background-color: color-mix(in srgb, var(--dark-grey) 80%, transparent);
+    border: 1px solid var(--mid-grey);
+    border-radius: 8px;
+    .card-header {
+        background-color: var(--accent-darker);
+        border-bottom: 1px solid var(--accent);
+        color: #fff;
+        font-size: var(--font-s4);
+        font-weight: 600;
+        padding: 1rem;
+        h5,
+        .card-title {
+            color: #fff;
+            margin: 0;
+            font-size: var(--font-s4);
+        }
+    }
+    .card-body {
+        padding: 1.5rem;
+        background-color: color-mix(in srgb, var(--accent) 5%, transparent);
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            li {
+                font-size: var(--font-s4);
+                color: var(--light-grey);
+                margin-bottom: 0.75rem;
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}
+
+// Badges - consistent with color scheme
+.badge {
+    font-size: 0.85em;
+    font-weight: 600;
+    padding: 0.35em 0.65em;
+    &.badge-primary {
+        background-color: var(--accent);
+        color: #fff;
+    }
+    &.badge-secondary {
+        background-color: var(--mid-grey);
+        color: #fff;
+    }
+    &.badge-info {
+        background-color: var(--accent-darker);
+        color: #fff;
+    }
+    &.badge-light {
+        background-color: var(--light-grey);
+        color: var(--dark-grey);
+    }
+}
+
+// Alerts - matching site style
+.alert {
+    font-size: var(--font-s4);
+    border-radius: 3px;
+    border: none;
+    &.alert-success {
+        background-color: rgba(40, 167, 69, 0.15);
+        color: #c3e6cb;
+        border-left: 4px solid #28a745;
+    }
+    &.alert-danger {
+        background-color: rgba(220, 53, 69, 0.15);
+        color: #f5c6cb;
+        border-left: 4px solid #dc3545;
+    }
+    &.alert-info {
+        background-color: color-mix(in srgb, var(--accent) 15%, transparent);
+        color: var(--accent-hover);
+        border-left: 4px solid var(--accent);
+    }
+}
+
+// Admin-specific styling
+.question-preview {
+    max-width: 300px;
+    word-wrap: break-word;
+}
+
+// Anti-bot trap field - looks like a normal optional field to bots
+.form-accessibility-label {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+// Mobile spacing for question form
+@media (max-width: var(--scr-width-sm)) {
+    #question-form {
+        margin-bottom: 3rem;
+    }
+    // Add bottom margin to dark-box on mobile (for "задать вопросы ведущим" block)
+    .dark-box {
+        margin-bottom: 2rem;
+    }
+}
+
+.table-active {
+    background-color: color-mix(in srgb, var(--accent) 20%, transparent) !important;
+}
 
 .stats-dot {
-  width: 8px;
-  height: 8px;
-  background-color: $accent;
-  border-radius: 50%;
-  display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent);
+    border-radius: 50%;
+    display: inline-block;
+}
+
+// Episode tags styling
+.episode-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    .tag {
+        background-color: var(--accent);
+        color: var(--black);
+        font-size: 1.1rem;
+        font-weight: 500;
+        padding: 0.4rem 0.75rem;
+        border-radius: 10px;
+        white-space: nowrap;
+        border: none;
+        &:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-1px);
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+    }
+}
+
+// Mobile responsive tags
+@media (max-width: var(--scr-width-sm)) {
+    .episode-tags {
+        gap: 0.4rem;
+        .tag {
+            font-size: 0.8rem;
+            padding: 0.35rem 0.6rem;
+        }
+        // Mobile tag cloud adjustments
+        &.tags-cloud {
+            gap: 0.5rem;
+            .tag {
+                &.tag-xs {
+                    font-size: 0.65rem;
+                    padding: 0.25rem 0.4rem;
+                    transform: scale(0.75);
+                    &:hover {
+                        transform: translateY(-1px) scale(0.8);
+                        box-shadow: 0 3px 10px color-mix(in srgb, var(--accent) 30%, transparent);
+                    }
+                }
+                &.tag-sm {
+                    font-size: 0.75rem;
+                    padding: 0.3rem 0.5rem;
+                    transform: scale(0.85);
+                    &:hover {
+                        transform: translateY(-1px) scale(0.9);
+                        box-shadow: 0 3px 10px color-mix(in srgb, var(--accent) 30%, transparent);
+                    }
+                }
+                &.tag-md {
+                    font-size: 0.85rem;
+                    padding: 0.35rem 0.6rem;
+                    transform: scale(0.9);
+                    &:hover {
+                        transform: translateY(-1px) scale(0.95);
+                        box-shadow: 0 3px 10px color-mix(in srgb, var(--accent) 30%, transparent);
+                    }
+                }
+                &.tag-lg {
+                    font-size: 1rem;
+                    padding: 0.4rem 0.7rem;
+                    transform: scale(1);
+                    font-weight: 600;
+                    &:hover {
+                        transform: translateY(-1px) scale(1.05);
+                        box-shadow: 0 3px 10px color-mix(in srgb, var(--accent) 30%, transparent);
+                    }
+                }
+                &.tag-xl {
+                    font-size: 1.1rem;
+                    padding: 0.45rem 0.8rem;
+                    transform: scale(1.1);
+                    font-weight: 700;
+                    &:hover {
+                        transform: translateY(-1px) scale(1.15);
+                        box-shadow: 0 4px 12px color-mix(in srgb, var(--accent) 40%, transparent);
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Tag links styling
+.tag-link {
+    text-decoration: none !important;
+    border: none !important;
+    &:hover {
+        text-decoration: none !important;
+        border: none !important;
+    }
+    .tag {
+        text-decoration: none !important;
+        border: none !important;
+    }
+}
+
+// Tags list page styling
+.tags-list {
+    margin: 2rem 0;
+    .tag-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.75rem;
+        padding: 0.5rem 0;
+    }
+    .tag-link {
+        text-decoration: none !important;
+        .tag {
+            transition: all 0.3s ease;
+            line-height: 1.4;
+            display: inline-block;
+            // Tag size variations for list view - increased base sizes
+            &.tag-xs {
+                font-size: 1rem;
+                padding: 0.5rem 0.8rem;
+            }
+            &.tag-sm {
+                font-size: 1.1rem;
+                padding: 0.55rem 0.85rem;
+            }
+            &.tag-md {
+                font-size: 1.2rem;
+                padding: 0.6rem 0.9rem;
+                font-weight: 500;
+            }
+            &.tag-lg {
+                font-size: 1.35rem;
+                padding: 0.65rem 1rem;
+                font-weight: 600;
+            }
+            &.tag-xl {
+                font-size: 1.5rem;
+                padding: 0.7rem 1.1rem;
+                font-weight: 700;
+            }
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 15px color-mix(in srgb, var(--accent) 30%, transparent);
+            }
+        }
+    }
+    &:hover {
+        text-decoration: none !important;
+    }
+}
+
+// Individual tag page styling - using standard header pattern
+// Breadcrumb navigation removed - using standard nav-back pattern
+.episodes-by-tag {
+    .episode-item {
+        background: linear-gradient(135deg, rgba(white, 0.02), rgba(white, 0.01));
+        border-left: 4px solid var(--accent);
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: flex-start;
+        gap: 1.5rem;
+        text-decoration: none !important;
+        color: inherit;
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            opacity: 0.5;
+        }
+        &:hover {
+            background: linear-gradient(135deg, rgba(white, 0.05), rgba(white, 0.03));
+            transform: translateX(8px) translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            border-left-color: var(--accent-hover);
+            text-decoration: none !important;
+            color: inherit;
+            .episode-title {
+                color: var(--accent);
+            }
+            .episode-artwork img {
+                transform: scale(1.05);
+            }
+        }
+        .episode-artwork {
+            flex-shrink: 0;
+            width: 120px;
+            height: 120px;
+            border-radius: 6px;
+            overflow: hidden;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+            }
+        }
+        .episode-meta {
+            position: relative;
+            flex: 1;
+            min-width: 0; // Allows text to truncate properly
+        }
+        .episode-title {
+            margin-bottom: 0.8rem;
+            color: white;
+            text-decoration: none !important;
+            font-size: 1.5rem;
+            font-weight: 500;
+            line-height: 1.3;
+            transition: color 0.2s ease;
+        }
+        .episode-date {
+            font-size: 0.85rem;
+            opacity: 0.6;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .episode-subtitle {
+            color: rgba(white, 0.8);
+            font-size: 1.2rem;
+            line-height: 1.4;
+            margin-bottom: 1rem;
+        }
+    }
+}
+
+.no-episodes {
+    color: rgba(white, 0.7);
+    .btn {
+        margin-top: 1rem;
+    }
 }

@@ -49,7 +49,7 @@ block content
           h3.text-white.mb-4 Источники прослушиваний
 
         p Всего слушателей: #{listeners}
-        p Дима! Обнови-ка данные!
+        p Надо обсудить что и как вставлять. а то статистика есть, но что с ней делать не до конца ясно
 
         .row
           each source in audienceSummary
@@ -59,8 +59,6 @@ block content
                 p #{yearSummary.year}: #{yearSummary.totalPlays} plays
 
   include partials/footer
-
-  include partials/_player
 
   script.
     document.addEventListener('DOMContentLoaded', function() {

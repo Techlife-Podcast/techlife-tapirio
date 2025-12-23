@@ -1,0 +1,89 @@
+extends layout
+
+block content
+  .container.page
+    .blog-content
+      include partials/_sec-nav
+      .row
+        .col-12
+          .d-flex.justify-content-between.align-items-center.mb-4
+            h2 Административная панель
+            .text-muted
+              | Всего вопросов: 
+              span#question-count #{questions.length}
+          
+          h3 Вопросы от слушателей
+          
+          if questions.length === 0
+            .alert.alert-info
+              | Пока нет вопросов от слушателей.
+          else
+            .table-responsive
+              table.table.table-hover
+                thead
+                  tr
+                    th(scope="col") #
+                    th(scope="col") Дата
+                    th(scope="col") Имя
+                    th(scope="col") Email
+                    th(scope="col") Категория
+                    th(scope="col") Вопрос
+                    th(scope="col") IP
+                tbody
+                  each question, index in questions
+                    tr
+                      th(scope="row") #{index + 1}
+                      td
+                        .small.text-muted #{question.formattedDate}
+                        .small #{question.formattedTime}
+                      td
+                        if question.name && question.name !== "Анонимный слушатель"
+                          span.badge.badge-primary #{question.name}
+                        else
+                          span.badge.badge-secondary Анонимный
+                      td
+                        if question.email
+                          a(href=`mailto:${question.email}`) #{question.email}
+                        else
+                          span.text-muted Не указан
+                      td
+                        if question.category && question.category !== "other"
+                          span.badge.badge-info #{getCategoryName(question.category)}
+                        else
+                          span.badge.badge-light Другое
+                      td
+                        .question-preview(data-full-text=question.question)
+                          | #{question.questionPreview}
+                          if question.question.length > 100
+                            | ...
+                            button.btn.btn-link.btn-sm.p-0.ml-1(onclick="toggleQuestion(this)") показать полностью
+                      td #{question.ip}
+
+  .spacer-lg
+
+  script.
+    function toggleQuestion(button) {
+      const cell = button.closest('.question-preview');
+      const fullText = cell.getAttribute('data-full-text');
+      const isExpanded = button.textContent === 'свернуть';
+      
+      if (isExpanded) {
+        cell.innerHTML = fullText.substring(0, 100) + '... <button class="btn btn-link btn-sm p-0 ml-1" onclick="toggleQuestion(this)">показать полностью</button>';
+      } else {
+        cell.innerHTML = fullText + ' <button class="btn btn-link btn-sm p-0 ml-1" onclick="toggleQuestion(this)">свернуть</button>';
+      }
+    }
+    
+    // Add some basic sorting functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      // Make table rows clickable for better UX
+      const rows = document.querySelectorAll('tbody tr');
+      rows.forEach(row => {
+        row.style.cursor = 'pointer';
+        row.addEventListener('click', function() {
+          // Toggle row selection
+          this.classList.toggle('table-active');
+        });
+      });
+    });
+

@@ -1,0 +1,43 @@
+//- pages/podcast-tags.pug - Tag cloud page with size scaling based on episode counts
+extends layout
+
+block content
+  .container.page
+    .blog-content
+      include partials/_sec-nav
+      .row
+        .col.col-lg-8.mb-2
+          h2 Теги подкаста
+          h3 Все темы эпизодов подкаста Технологии и жизнь
+          
+      .row
+        .col-lg-10
+          .episode-tags.tags-list
+            - const sortedTags = podcastTags.sort((a, b) => b.count - a.count)
+            - const maxCount = Math.max(...sortedTags.map(t => t.count))
+            - const minCount = Math.min(...sortedTags.map(t => t.count))
+            - const getTagSize = (count) => {
+            -   const ratio = (count - minCount) / (maxCount - minCount) || 0
+            -   if (ratio >= 0.8) return 'tag-xl'
+            -   if (ratio >= 0.6) return 'tag-lg'
+            -   if (ratio >= 0.4) return 'tag-md'
+            -   if (ratio >= 0.2) return 'tag-sm'
+            -   return 'tag-xs'
+            - }
+            each tagData in sortedTags
+              .tag-item
+                a.tag-link(href=`/tags/${encodeURIComponent(tagData.name)}`)
+                  span.tag(class=getTagSize(tagData.count)) # #{tagData.name} (#{tagData.count})
+          
+          .mt-4
+            p.text-muted
+              | Всего тегов: 
+              strong.text-white #{podcastTags.length}
+
+  .mt-5
+  include partials/_banner-telegram
+
+  .spacer-lg
+  include partials/header
+
+  include partials/footer

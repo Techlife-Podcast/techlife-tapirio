@@ -1,0 +1,42 @@
+{
+    "_comment": "GPT-5 and o1 models use 'max_completion_tokens' instead of 'max_tokens' and only support default temperature (1) - both are handled automatically",
+    "model": {
+        "name": "gpt-4o",
+        "temperature": 0.3,
+        "maxTokens": {
+            "categoryExtraction": 200,
+            "episodeAnalysis": 300
+        }
+    },
+    "analysis": {
+        "maxCategories": 7,
+        "maxTagsPerEpisode": 3,
+        "rateLimitDelayMs": 1000,
+        "progressSaveInterval": 5,
+        "retrySettings": {
+            "maxRetries": 2,
+            "baseDelayMs": 2000
+        },
+        "presetCategories": [
+            "Искусственный интеллект",
+            "Устройства и гаджеты",
+            "Программное обеспечение",
+            "Интернет-технологии",
+            "Конфиденциальность и безопасность",
+            "Технологические компании",
+            "Культура и общество",
+            "Философия",
+            "Путешествия"
+        ]
+    },
+    "prompts": {
+        "categoryExtraction": {
+            "systemMessage": "You are an expert at analyzing Russian technology podcast content and extracting meaningful categories.",
+            "temperature": 0.3
+        },
+        "episodeAnalysis": {
+            "systemMessage": "You are an expert at analyzing individual podcast episodes and assigning relevant tags from predefined categories.",
+            "temperature": 0.2
+        }
+    }
+}

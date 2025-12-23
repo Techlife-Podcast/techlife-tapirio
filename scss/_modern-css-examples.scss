@@ -1,0 +1,86 @@
+// scss/_modern-css-examples.scss
+// Examples of modern CSS features enabled by PostCSS
+// CSS Custom Properties (CSS Variables)
+:root {
+    --primary-color: #007bff;
+    --text-color: #333;
+    --border-radius: 8px;
+    --spacing-unit: 1rem;
+}
+
+// CSS Nesting (Sass-like nesting in CSS)
+.modern-component {
+    background: var(--primary-color);
+    border-radius: var(--border-radius);
+    padding: calc(var(--spacing-unit) * 2);
+    & .title {
+        color: var(--text-color);
+        font-weight: bold;
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+    & .content {
+        margin-top: var(--spacing-unit);
+        & p {
+            line-height: 1.6;
+        }
+    }
+}
+
+// Modern Color Functions (Lab, OKLab, color-mix)
+.modern-colors {
+    // These will be processed by PostCSS with fallbacks
+    background: color-mix(in srgb, var(--primary-color) 80%, white);
+    border-color: lab(50% 20 -30);
+    &:hover {
+        background: oklab(0.7 0.1 0.1);
+    }
+}
+
+// Logical Properties (for better RTL support)
+.logical-properties {
+    padding-inline: var(--spacing-unit);
+    margin-block-start: var(--spacing-unit);
+    border-inline-start: 2px solid var(--primary-color);
+}
+
+// Container Queries - requires separate postcss-container-query plugin
+// @container (min-width: 400px) {
+//   .responsive-component {
+//     flex-direction: row;
+//     gap: var(--spacing-unit);
+//   }
+// }
+// Modern Media Query Ranges
+@media (width >=768px) {
+    .desktop-layout {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--spacing-unit);
+    }
+}
+
+// Cascade Layers for better CSS organization
+@layer base,
+components,
+utilities;
+@layer base {
+    body {
+        font-family: system-ui, sans-serif;
+        color: var(--text-color);
+    }
+}
+
+@layer components {
+    .btn-modern {
+        background: var(--primary-color);
+        border: none;
+        border-radius: var(--border-radius);
+        padding: calc(var(--spacing-unit) / 2) var(--spacing-unit);
+        color: white;
+        &:hover {
+            background: color-mix(in srgb, var(--primary-color) 90%, black);
+        }
+    }
+}
