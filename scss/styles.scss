@@ -227,28 +227,26 @@ pre {
 
 .dev-popover {
   position: absolute;
-  top: 36px;
-  right: -10px;
-  background-color: #1a1a1a;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  min-width: 320px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  top: 30px;
+  right: -8px; // Align with indicator (16px circle / 2 = 8px)
+  background-color: rgba($dark-grey, 0.98);
+  border: 2px solid #ff6600;
+  border-radius: 8px;
+  min-width: 300px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   display: none;
   z-index: 9999;
-  backdrop-filter: blur(10px);
-  overflow: visible;
 
   &.active {
     display: block;
-    animation: popover-appear 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: popover-appear 0.2s ease;
   }
 
   &::before {
     content: '';
     position: absolute;
     top: -8px;
-    right: 18px;
+    right: 8px; // Position arrow directly under circle center
     width: 0;
     height: 0;
     border-left: 8px solid transparent;
@@ -259,30 +257,26 @@ pre {
 
 .dev-popover-header {
   background-color: #ff6600;
-  color: #000;
-  padding: 1rem;
-  font-weight: 700;
-  border-radius: 11px 11px 0 0;
-  font-size: 16px;
+  color: $black;
+  padding: 0.5rem 0.75rem;
+  font-weight: 600;
+  border-radius: 6px 6px 0 0;
+  font-size: $font-s5;
   text-align: center;
-  letter-spacing: 0.5px;
-  box-shadow: 0 1px 0 rgba(0,0,0,0.1);
 }
 
 .dev-popover-content {
-  padding: 0.5rem 0;
+  padding: 0;
 }
 
 .dev-info-table {
   width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  font-size: 15px;
+  border-collapse: collapse;
+  font-size: $font-s5;
 
   td {
-    padding: 0.8rem 1.5rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    vertical-align: middle;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid rgba($mid-grey, 0.2);
   }
 
   tr:last-child td {
@@ -290,30 +284,28 @@ pre {
   }
 
   .dev-label {
-    color: #999;
+    color: $mid-grey;
     white-space: nowrap;
-    font-weight: 500;
-    width: 30%;
+    font-weight: 400;
+    width: 35%;
   }
 
   .dev-value {
-    color: #fff;
+    color: $accent;
+    text-align: left;
     word-break: break-word;
-    font-weight: 500;
-    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
-    font-size: 14px;
+    font-weight: 600;
   }
 
   a.dev-link {
-    color: #41caff;
+    color: $accent;
     text-decoration: none;
     border-bottom: 1px solid transparent;
     word-break: break-all;
-    font-weight: 500;
-    transition: all 0.2s ease;
+    font-weight: 600;
 
     &:hover {
-      border-bottom-color: #41caff;
+      border-bottom-color: $accent;
       opacity: 0.9;
     }
   }
