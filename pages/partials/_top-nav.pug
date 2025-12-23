@@ -6,22 +6,25 @@ if path
         .dev-popover#devPopover
           .dev-popover-header Development Environment
           .dev-popover-content
-            .dev-info-item
-              strong Branch:
-              span= process.env.VERCEL_GIT_COMMIT_REF || 'local'
-            .dev-info-item
-              strong Commit:
-              span= process.env.VERCEL_GIT_COMMIT_SHA ? process.env.VERCEL_GIT_COMMIT_SHA.substring(0, 7) : 'N/A'
-            .dev-info-item
-              strong Environment:
-              span= process.env.VERCEL_ENV || process.env.NODE_ENV || 'unknown'
-            .dev-info-item
-              strong Region:
-              span= process.env.VERCEL_REGION || 'local'
-            if process.env.VERCEL_URL
-              .dev-info-item
-                strong Deploy URL:
-                a.dev-link(href=`https://${process.env.VERCEL_URL}` target="_blank" rel="noopener")= process.env.VERCEL_URL
+            table.dev-info-table
+              tbody
+                tr
+                  td.dev-label Branch
+                  td.dev-value= process.env.VERCEL_GIT_COMMIT_REF || 'local'
+                tr
+                  td.dev-label Commit
+                  td.dev-value= process.env.VERCEL_GIT_COMMIT_SHA ? process.env.VERCEL_GIT_COMMIT_SHA.substring(0, 7) : 'N/A'
+                tr
+                  td.dev-label Environment
+                  td.dev-value= process.env.VERCEL_ENV || process.env.NODE_ENV || 'unknown'
+                tr
+                  td.dev-label Region
+                  td.dev-value= process.env.VERCEL_REGION || 'local'
+                if process.env.VERCEL_URL
+                  tr
+                    td.dev-label Deploy URL
+                    td.dev-value
+                      a.dev-link(href=`https://${process.env.VERCEL_URL}` target="_blank" rel="noopener")= process.env.VERCEL_URL
     //- a.stats-dot.me-3(href="/stats" title="Statistics")
     nav.mt-3
       ul.list-inline.mb-3

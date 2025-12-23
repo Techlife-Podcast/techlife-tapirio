@@ -228,15 +228,14 @@ pre {
 .dev-popover {
   position: absolute;
   top: 30px;
-  right: 0;
+  right: -8px; // Align arrow with circle center
   background-color: rgba($dark-grey, 0.98);
   border: 2px solid #ff6600;
   border-radius: 8px;
-  min-width: 280px;
+  min-width: 300px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   display: none;
   z-index: 9999;
-  font-size: $font-s5;
 
   &.active {
     display: block;
@@ -247,7 +246,7 @@ pre {
     content: '';
     position: absolute;
     top: -8px;
-    right: 12px;
+    right: 8px; // Position arrow directly under circle
     width: 0;
     height: 0;
     border-left: 8px solid transparent;
@@ -263,42 +262,47 @@ pre {
   font-weight: 600;
   border-radius: 6px 6px 0 0;
   font-size: $font-s5;
+  text-align: center;
 }
 
 .dev-popover-content {
-  padding: 0.75rem;
+  padding: 0;
 }
 
-.dev-info-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 0.5rem;
-  gap: 0.75rem;
+.dev-info-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: $font-s5;
 
-  &:last-child {
-    margin-bottom: 0;
+  td {
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid rgba($mid-grey, 0.2);
   }
 
-  strong {
-    color: $light-grey;
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  .dev-label {
+    color: $mid-grey;
     white-space: nowrap;
-    font-size: $font-s5;
+    font-weight: 400;
+    width: 35%;
   }
 
-  span {
+  .dev-value {
     color: $accent;
     text-align: right;
     word-break: break-word;
-    font-size: $font-s5;
+    font-weight: 600;
   }
 
   a.dev-link {
     color: $accent;
-    font-size: $font-s5;
-    border-bottom: 1px solid transparent;
     text-decoration: none;
+    border-bottom: 1px solid transparent;
     word-break: break-all;
+    font-weight: 600;
 
     &:hover {
       border-bottom-color: $accent;
