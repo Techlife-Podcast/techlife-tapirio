@@ -361,6 +361,11 @@ a.d-flex {
             margin-bottom: 0;
         }
     }
+    // Visited links in episode descriptions - subtle light gray
+    a:visited {
+        color: #c3dade;
+        border-bottom-color: #c3dade;
+    }
     ul,
     ol {
         margin: 0 0 2rem;
