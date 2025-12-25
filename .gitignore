@@ -12,6 +12,7 @@ tmp/
 # New entries
 # Environment files
 .env
+.env.local
 .server
 
 # PM2 files
@@ -43,3 +44,6 @@ playwright-test-results/
 playwright-report/
 
 .vscode/
+
+# Vercel
+.vercel
