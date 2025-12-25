@@ -31,7 +31,8 @@ Set these in the Vercel dashboard (Project Settings → Environment Variables):
 
 1. **Build Phase**:
    - Vercel runs `npm install` to install dependencies including `sass-embedded`
-   - Runs `npm run build` which:
+   - Runs `buildCommand` from `vercel.json` which:
+     - **Checks for new episodes** and only runs analysis if needed (skips if all episodes already analyzed)
      - Compiles SCSS to CSS using Vite with modern-compiler API
      - Copies compiled CSS from `dist/` to `public/stylesheets/`
      - Generates asset manifest for cache busting

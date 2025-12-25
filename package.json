@@ -15,6 +15,7 @@
         "build": "npm run sass-build && node scripts/build-assets.mjs",
         "cache-bust": "node scripts/build-assets.mjs",
         "analyze-podcast": "npx ts-node scripts/utils/podcast-analyzer/podcast-analyzer.ts",
+        "check-analyze": "node scripts/check-and-analyze.mjs",
         "test-feed": "node scripts/utils/podcast-analyzer/test-analyzer.js",
         "tsc": "tsc --noEmit",
         "screenshots": "playwright test tests/screenshots/responsive-screenshots.spec.ts",
