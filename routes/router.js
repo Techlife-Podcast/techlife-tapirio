@@ -186,6 +186,97 @@ router.get("/blog", (req, res) => {
     });
 });
 
+// Plain markdown archive of all episodes
+router.get("/episodes.md", (req, res) => {
+    const { parse } = require("node-html-parser");
+    
+    const markdown = generateEpisodesMarkdown(episodes, podcast, parse);
+    
+    res.set('Content-Type', 'text/plain; charset=utf-8');
+    res.send(markdown);
+});
+
+/**
+ * Generate markdown text for all episodes
+ * @param {Array} episodes - Array of processed episodes
+ * @param {Object} podcast - Podcast metadata
+ * @param {Function} parse - HTML parser function
+ * @returns {string} Markdown formatted text
+ */
+function generateEpisodesMarkdown(episodes, podcast, parse) {
+    const lines = [];
+    
+    // Header
+    lines.push(`# Подкаст "${podcast.channel.title}"`);
+    lines.push('');
+    
+    // Episodes (newest first - already sorted)
+    for (const episode of episodes) {
+        lines.push(`## №${episode.episodeNum} ${episode.title}`);
+        lines.push(`### ${episode.pubDateConverted}`);
+        lines.push('');
+        
+        // Краткое описание from itunes:subtitle
+        const subtitle = episode['itunes:subtitle'];
+        if (subtitle) {
+            lines.push(`**Краткое описание:** ${subtitle}`);
+            lines.push('');
+        }
+        
+        // Full description - extract text from HTML
+        if (episode.description) {
+            const root = parse(episode.description);
+            
+            // Remove image tags
+            root.querySelectorAll('img').forEach(img => img.remove());
+            
+            // Convert links to "Text (URL)" format
+            root.querySelectorAll('a').forEach(a => {
+                const href = a.getAttribute('href');
+                const text = a.text.trim();
+                if (href && text && !href.includes('youtube.com/@techlifepodcast')) {
+                    a.replaceWith(`${text} (${href})`);
+                } else {
+                    a.replaceWith(text);
+                }
+            });
+            
+            // Get paragraphs
+            const paragraphs = root.querySelectorAll('p');
+            if (paragraphs.length > 0) {
+                lines.push('### Описание');
+                lines.push('');
+                paragraphs.forEach(p => {
+                    const text = p.text.trim();
+                    if (text && !text.startsWith('📺') && !text.includes('наш подкаст в директории')) {
+                        lines.push(text);
+                        lines.push('');
+                    }
+                });
+            }
+            
+            // Get list items (links section)
+            const listItems = root.querySelectorAll('li');
+            if (listItems.length > 0) {
+                lines.push('### Ссылки');
+                lines.push('');
+                listItems.forEach(li => {
+                    const text = li.text.trim();
+                    if (text) {
+                        lines.push(`- ${text}`);
+                    }
+                });
+                lines.push('');
+            }
+        }
+        
+        lines.push('---');
+        lines.push('');
+    }
+    
+    return lines.join('\n');
+}
+
 router.get("/api/search", cors(), (req, res) => {
     const search = req.query.name.toLowerCase();
     const results = search ?
