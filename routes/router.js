@@ -186,6 +186,74 @@ router.get("/blog", (req, res) => {
     });
 });
 
+// XML Sitemap for SEO
+router.get("/sitemap.xml", (req, res) => {
+    const baseUrl = 'https://www.techlifepodcast.com';
+    const today = new Date().toISOString().split('T')[0];
+    
+    let xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>${baseUrl}/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/resources</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/tags</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/episodes.md</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/blog</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+`;
+
+    // Add all episodes
+    for (const episode of episodes) {
+        xml += `  <url>
+    <loc>${baseUrl}/episodes/${episode.episodeNum}</loc>
+    <lastmod>${episode.pubDateConverted ? new Date(episode.pubDate).toISOString().split('T')[0] : today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+`;
+    }
+
+    // Add all tags
+    const { getAllPodcastTags } = require('../services/episode-service');
+    const tags = getAllPodcastTags(episodes);
+    for (const tag of tags) {
+        xml += `  <url>
+    <loc>${baseUrl}/tags/${encodeURIComponent(tag.name)}</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+`;
+    }
+
+    xml += '</urlset>';
+
+    res.set('Content-Type', 'application/xml');
+    res.send(xml);
+});
+
 // Plain markdown archive of all episodes
 router.get("/episodes.md", (req, res) => {
     const { parse } = require("node-html-parser");
