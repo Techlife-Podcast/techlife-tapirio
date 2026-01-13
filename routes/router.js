@@ -298,40 +298,46 @@ function generateEpisodesMarkdown(episodes, podcast, parse) {
             // Remove image tags
             root.querySelectorAll('img').forEach(img => img.remove());
             
-            // Convert links to "Text (URL)" format
-            root.querySelectorAll('a').forEach(a => {
-                const href = a.getAttribute('href');
-                const text = a.text.trim();
-                if (href && text && !href.includes('youtube.com/@techlifepodcast')) {
-                    a.replaceWith(`${text} (${href})`);
-                } else {
-                    a.replaceWith(text);
+            // Get paragraphs (plain text only, skip link-only paragraphs)
+            const paragraphs = root.querySelectorAll('p');
+            const descriptionLines = [];
+            paragraphs.forEach(p => {
+                const text = p.text.trim();
+                const link = p.querySelector('a');
+                // Skip if: empty, boilerplate, or paragraph is just a single link
+                const isLinkOnly = link && link.text.trim() === text;
+                if (text && 
+                    !text.startsWith('📺') && 
+                    !text.includes('наш подкаст в директории') &&
+                    !text.includes('директории подкастов Apple') &&
+                    !text.includes('Наш канал на Youtube') &&
+                    !isLinkOnly) {
+                    descriptionLines.push(text);
                 }
             });
             
-            // Get paragraphs
-            const paragraphs = root.querySelectorAll('p');
-            if (paragraphs.length > 0) {
+            if (descriptionLines.length > 0) {
                 lines.push('### Описание');
                 lines.push('');
-                paragraphs.forEach(p => {
-                    const text = p.text.trim();
-                    if (text && !text.startsWith('📺') && !text.includes('наш подкаст в директории')) {
-                        lines.push(text);
-                        lines.push('');
-                    }
+                descriptionLines.forEach(line => {
+                    lines.push(line);
+                    lines.push('');
                 });
             }
             
-            // Get list items (links section)
+            // Get list items with formatted links
             const listItems = root.querySelectorAll('li');
             if (listItems.length > 0) {
                 lines.push('### Ссылки');
                 lines.push('');
                 listItems.forEach(li => {
-                    const text = li.text.trim();
-                    if (text) {
-                        lines.push(`- ${text}`);
+                    const link = li.querySelector('a');
+                    if (link) {
+                        const href = link.getAttribute('href');
+                        const text = link.text.trim();
+                        if (href && text) {
+                            lines.push(`- ${text} (${href})`);
+                        }
                     }
                 });
                 lines.push('');
